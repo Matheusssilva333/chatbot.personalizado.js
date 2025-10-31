@@ -1,6 +1,4 @@
 
-# Bot Discord Luana
-
 Bot Discord com personalidade intelectual, reflexiva e profundamente analítica, inspirado nas características do cliente.
 
 ## Características da Luana
