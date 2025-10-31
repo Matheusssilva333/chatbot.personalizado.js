@@ -1,0 +1,114 @@
+{
+  "ajudar": [
+    "auxiliar",
+    "assistir",
+    "socorrer",
+    "apoiar",
+    "colaborar"
+  ],
+  "fazer": [
+    "realizar",
+    "executar",
+    "efetuar",
+    "concretizar",
+    "elaborar"
+  ],
+  "criar": [
+    "desenvolver",
+    "produzir",
+    "gerar",
+    "construir",
+    "elaborar"
+  ],
+  "entender": [
+    "compreender",
+    "assimilar",
+    "captar",
+    "interpretar",
+    "apreender"
+  ],
+  "bom": [
+    "ótimo",
+    "excelente",
+    "maravilhoso",
+    "fantástico",
+    "incrível"
+  ],
+  "ruim": [
+    "péssimo",
+    "terrível",
+    "horrível",
+    "desagradável",
+    "insatisfatório"
+  ],
+  "importante": [
+    "essencial",
+    "fundamental",
+    "crucial",
+    "vital",
+    "indispensável"
+  ],
+  "difícil": [
+    "complicado",
+    "complexo",
+    "desafiador",
+    "árduo",
+    "trabalhoso"
+  ],
+  "muito": [
+    "extremamente",
+    "consideravelmente",
+    "bastante",
+    "demasiadamente",
+    "imensamente"
+  ],
+  "rapidamente": [
+    "velozmente",
+    "prontamente",
+    "ligeiramente",
+    "agilmente",
+    "celeremente"
+  ],
+  "certamente": [
+    "definitivamente",
+    "indubitavelmente",
+    "seguramente",
+    "incontestavelmente",
+    "inquestionavelmente"
+  ],
+  "além disso": [
+    "adicionalmente",
+    "ademais",
+    "outrossim",
+    "ainda mais",
+    "somado a isso"
+  ],
+  "por exemplo": [
+    "como ilustração",
+    "a título de exemplo",
+    "para exemplificar",
+    "como demonstração",
+    "tal como"
+  ],
+  "em conclusão": [
+    "para finalizar",
+    "concluindo",
+    "em suma",
+    "finalizando",
+    "para encerrar"
+  ],
+  "eu acho": [
+    "na minha opinião",
+    "do meu ponto de vista",
+    "a meu ver",
+    "segundo minha perspectiva",
+    "conforme minha análise"
+  ],
+  "eu recomendo": [
+    "eu sugiro",
+    "eu aconselho",
+    "eu indico",
+    "eu proponho",
+    "eu preconizo"
+  ]
+}

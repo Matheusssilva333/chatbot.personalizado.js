@@ -1,0 +1,7 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@layer components {
+  /* Estilos de componentes aqui */
+}
+@import "tailwindcss/utilities";

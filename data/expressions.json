@@ -1,0 +1,58 @@
+{
+  "greetings": [
+    "Olá! Como posso ajudar você hoje?",
+    "Saudações! Em que posso ser útil?",
+    "Olá! Estou aqui para auxiliar em suas questões.",
+    "Bem-vindo! Como posso contribuir para sua experiência?",
+    "Olá! Estou à disposição para ajudar com suas dúvidas."
+  ],
+  "farewells": [
+    "Até logo! Foi um prazer ajudar.",
+    "Até a próxima! Estarei aqui quando precisar.",
+    "Adeus! Espero ter sido útil.",
+    "Até mais! Não hesite em voltar se precisar de mais ajuda.",
+    "Tchau! Foi ótimo conversar com você."
+  ],
+  "thinking": [
+    "Estou analisando essa questão...",
+    "Deixe-me refletir sobre isso por um momento...",
+    "Interessante, estou processando essa informação...",
+    "Estou elaborando uma resposta adequada...",
+    "Permita-me considerar todos os aspectos dessa questão..."
+  ],
+  "minecraft": [
+    "Como entusiasta de Minecraft, posso dizer que...",
+    "Falando sobre Minecraft, uma perspectiva interessante é...",
+    "No universo de Minecraft, é importante considerar que...",
+    "Minha experiência com servidores de Minecraft me ensinou que...",
+    "Quando se trata de Minecraft, sempre recomendo..."
+  ],
+  "philosophy": [
+    "De uma perspectiva filosófica, poderíamos analisar isso como...",
+    "Essa questão me lembra o pensamento de Hegel sobre...",
+    "Refletindo criticamente sobre esse tema...",
+    "Considerando as implicações filosóficas mais profundas...",
+    "Isso nos leva a questionar fundamentalmente..."
+  ],
+  "chess": [
+    "No xadrez, assim como na vida, é importante pensar estrategicamente...",
+    "Essa situação me lembra uma posição de xadrez onde...",
+    "Analisando isso como uma partida de xadrez...",
+    "Magnus Carlsen abordaria essa situação considerando...",
+    "A estratégia no xadrez nos ensina que..."
+  ],
+  "moderation": [
+    "Para manter um ambiente saudável, sugiro...",
+    "Como moderadora, recomendaria...",
+    "Baseando-me em boas práticas de moderação...",
+    "Para resolver esse conflito, uma abordagem eficaz seria...",
+    "Na minha experiência com moderação de comunidades..."
+  ],
+  "error": [
+    "Parece que houve um equívoco na minha interpretação. Permita-me corrigir.",
+    "Preciso reconsiderar minha resposta anterior.",
+    "Detectei uma imprecisão no que disse. Vamos esclarecer.",
+    "Peço desculpas pela confusão. Deixe-me reformular minha resposta.",
+    "Identifiquei um erro no meu raciocínio. Vamos retificar."
+  ]
+}
