@@ -1,0 +1,95 @@
+{
+  "conexao_servidor": {
+    "description": "Problemas de conexão com o servidor de Minecraft",
+    "keywords": [
+      "conectar",
+      "servidor",
+      "conexão",
+      "minecraft",
+      "erro",
+      "não consigo entrar"
+    ],
+    "solutions": [
+      {
+        "title": "Verificar endereço do servidor",
+        "steps": [
+          "Confirme se o endereço IP ou domínio do servidor está correto",
+          "Verifique se a porta está correta (padrão: 25565)",
+          "Tente usar o endereço IP direto em vez do domínio"
+        ],
+        "automated": true
+      },
+      {
+        "title": "Verificar firewall",
+        "steps": [
+          "Verifique se o firewall está bloqueando a conexão",
+          "Adicione o Minecraft às exceções do firewall",
+          "Temporariamente desative o firewall para testar"
+        ],
+        "automated": false
+      }
+    ]
+  },
+  "comandos_discord": {
+    "description": "Problemas com comandos do Discord",
+    "keywords": [
+      "comando",
+      "slash",
+      "não funciona",
+      "erro",
+      "discord",
+      "bot"
+    ],
+    "solutions": [
+      {
+        "title": "Verificar permissões do bot",
+        "steps": [
+          "Confirme se o bot tem as permissões necessárias no servidor",
+          "Verifique se o comando está registrado corretamente",
+          "Tente reiniciar o bot para atualizar os comandos"
+        ],
+        "automated": true
+      },
+      {
+        "title": "Atualizar comandos",
+        "steps": [
+          "Execute o script deploy-commands.js para atualizar os comandos",
+          "Verifique se há erros no console durante o registro",
+          "Aguarde alguns minutos para a propagação dos comandos"
+        ],
+        "automated": true
+      }
+    ]
+  },
+  "lag_servidor": {
+    "description": "Problemas de lag no servidor",
+    "keywords": [
+      "lag",
+      "lento",
+      "travando",
+      "fps",
+      "performance",
+      "minecraft"
+    ],
+    "solutions": [
+      {
+        "title": "Otimizar configurações do servidor",
+        "steps": [
+          "Ajuste view-distance para um valor menor em server.properties",
+          "Reduza a quantidade de entidades com gamerule maxEntityCramming",
+          "Limite o número de mobs com gamerule randomTickSpeed"
+        ],
+        "automated": true
+      },
+      {
+        "title": "Verificar recursos do sistema",
+        "steps": [
+          "Monitore o uso de CPU e memória durante a execução",
+          "Aumente a alocação de RAM para o servidor",
+          "Verifique se há outros processos consumindo recursos"
+        ],
+        "automated": false
+      }
+    ]
+  }
+}

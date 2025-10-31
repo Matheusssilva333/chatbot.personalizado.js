@@ -1,0 +1,21 @@
+# Node and tooling
+node_modules/
+npm-debug.log*
+
+# Environment / secrets
+.env
+
+# Logs and telemetry
+logs/
+data/personalization.json
+data/performance.json
+data/reports/
+
+# Build outputs
+dist/
+**/dist/
+
+# OS/Editor junk
+.DS_Store
+Thumbs.db
+.vscode/data/history.json

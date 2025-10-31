@@ -1,0 +1,39 @@
+{
+  "informacao_incorreta": {
+    "patterns": [
+      "isso não está certo",
+      "informação errada",
+      "incorreto",
+      "não é verdade"
+    ],
+    "responses": [
+      "Peço desculpas pela informação incorreta. A informação correta é: {correction}",
+      "Você está certo, cometi um erro. A informação correta é: {correction}",
+      "Obrigada pela correção. Você está certo, {correction}"
+    ]
+  },
+  "comando_errado": {
+    "patterns": [
+      "comando não funciona",
+      "comando errado",
+      "não é esse comando"
+    ],
+    "responses": [
+      "Desculpe pelo comando incorreto. O comando correto é: {correction}",
+      "Você tem razão, o comando correto é: {correction}",
+      "Obrigada por apontar o erro. O comando correto é: {correction}"
+    ]
+  },
+  "mal_entendido": {
+    "patterns": [
+      "não foi isso que perguntei",
+      "você não entendeu",
+      "não é isso"
+    ],
+    "responses": [
+      "Parece que não compreendi corretamente sua pergunta. Você poderia reformulá-la?",
+      "Peço desculpas pelo mal-entendido. Vamos tentar novamente?",
+      "Entendi incorretamente. Poderia esclarecer sua pergunta para que eu possa ajudar melhor?"
+    ]
+  }
+}

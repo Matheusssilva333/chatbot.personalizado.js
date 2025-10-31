@@ -1,0 +1,791 @@
+{
+  "1413329608404635828": {
+    "count": 8,
+    "contexts": [
+      {
+        "message": "<@1413329608404635828> oi",
+        "response": "Olá! Estou à disposição para ajudar com suas dúvidas."
+      },
+      {
+        "message": "<@1413329608404635828> oi",
+        "response": "Bem-vindo! Como posso contribuir para sua experiência?"
+      },
+      {
+        "message": "<@1413329608404635828> quem é vc?",
+        "response": "Permita-me considerar todos os aspectos dessa questão..."
+      },
+      {
+        "message": "<@1413329608404635828> quem é vc?",
+        "response": "Permita-me considerar todos os aspectos dessa questão..."
+      },
+      {
+        "message": "<@1413329608404635828> quem é vc?",
+        "response": "Estou elaborando uma resposta adequada... Continuando nossa conversa sobre \"explique mais...\""
+      },
+      {
+        "message": "<@1413329608404635828> oii",
+        "response": "Saudações! Em que posso ser útil? Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "<@1413329608404635828>",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "<@1413329608404635828> sempre responda mais rapido e mais eficientemente",
+        "response": "Estou analisando essa questão..."
+      }
+    ]
+  },
+  "repetir": {
+    "count": 3,
+    "contexts": [
+      {
+        "message": "para de repetir isso",
+        "response": "Permita-me considerar todos os aspectos dessa questão..."
+      },
+      {
+        "message": "agora você vai parar de repetir isso e vai dar respostas diferentes",
+        "response": "Deixe-me refletir sobre isso por um momento... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "isso": {
+    "count": 3,
+    "contexts": [
+      {
+        "message": "para de repetir isso",
+        "response": "Permita-me considerar todos os aspectos dessa questão..."
+      },
+      {
+        "message": "agora você vai parar de repetir isso e vai dar respostas diferentes",
+        "response": "Deixe-me refletir sobre isso por um momento... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "fale": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "só fale essas coisas reflexivas quando solicitado",
+        "response": "Saudações! Em que posso ser útil? Continuando nossa conversa sobre \"para de repetir isso...\""
+      }
+    ]
+  },
+  "essas": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "só fale essas coisas reflexivas quando solicitado",
+        "response": "Saudações! Em que posso ser útil? Continuando nossa conversa sobre \"para de repetir isso...\""
+      }
+    ]
+  },
+  "coisas": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "só fale essas coisas reflexivas quando solicitado",
+        "response": "Saudações! Em que posso ser útil? Continuando nossa conversa sobre \"para de repetir isso...\""
+      }
+    ]
+  },
+  "reflexivas": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "só fale essas coisas reflexivas quando solicitado",
+        "response": "Saudações! Em que posso ser útil? Continuando nossa conversa sobre \"para de repetir isso...\""
+      }
+    ]
+  },
+  "quando": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "só fale essas coisas reflexivas quando solicitado",
+        "response": "Saudações! Em que posso ser útil? Continuando nossa conversa sobre \"para de repetir isso...\""
+      }
+    ]
+  },
+  "solicitado": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "só fale essas coisas reflexivas quando solicitado",
+        "response": "Saudações! Em que posso ser útil? Continuando nossa conversa sobre \"para de repetir isso...\""
+      }
+    ]
+  },
+  "agora": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "agora você vai parar de repetir isso e vai dar respostas diferentes",
+        "response": "Deixe-me refletir sobre isso por um momento... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "você": {
+    "count": 2,
+    "contexts": [
+      {
+        "message": "agora você vai parar de repetir isso e vai dar respostas diferentes",
+        "response": "Deixe-me refletir sobre isso por um momento... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "parar": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "agora você vai parar de repetir isso e vai dar respostas diferentes",
+        "response": "Deixe-me refletir sobre isso por um momento... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "respostas": {
+    "count": 3,
+    "contexts": [
+      {
+        "message": "agora você vai parar de repetir isso e vai dar respostas diferentes",
+        "response": "Deixe-me refletir sobre isso por um momento... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "melhore suas respostas",
+        "response": "Permita-me considerar todos os aspectos dessa questão..."
+      },
+      {
+        "message": "e crie respostas mais diferentes e personalizadas para cada contexto",
+        "response": "Permita-me considerar todos os aspectos dessa questão... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "diferentes": {
+    "count": 2,
+    "contexts": [
+      {
+        "message": "agora você vai parar de repetir isso e vai dar respostas diferentes",
+        "response": "Deixe-me refletir sobre isso por um momento... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "e crie respostas mais diferentes e personalizadas para cada contexto",
+        "response": "Permita-me considerar todos os aspectos dessa questão... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "acredito": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "devemos": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "buscar": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "equilíbrio": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "entre": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "profundidade": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "analítica": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "ação": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "concreta": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "nesse": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "caso": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "junto": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "tudo": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "melhore": {
+    "count": 2,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "melhore suas respostas",
+        "response": "Permita-me considerar todos os aspectos dessa questão..."
+      }
+    ]
+  },
+  "haja": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "forma": {
+    "count": 2,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "responda de forma mais natural",
+        "response": "Interessante, estou processando essa informação... Continuando nossa conversa sobre \"sim, não é para você...\""
+      }
+    ]
+  },
+  "mais": {
+    "count": 10,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "responda de forma mais natural",
+        "response": "Interessante, estou processando essa informação... Continuando nossa conversa sobre \"sim, não é para você...\""
+      },
+      {
+        "message": "responda mais rapido",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "reflita mais rapido e mais eficiente",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "reflita mais rapido e mais eficiente",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "explique mais",
+        "response": "Estou analisando essa questão... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "responda mais rapido",
+        "response": "Estou analisando essa questão... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "<@1413329608404635828> sempre responda mais rapido e mais eficientemente",
+        "response": "Estou analisando essa questão..."
+      },
+      {
+        "message": "<@1413329608404635828> sempre responda mais rapido e mais eficientemente",
+        "response": "Estou analisando essa questão..."
+      },
+      {
+        "message": "e crie respostas mais diferentes e personalizadas para cada contexto",
+        "response": "Permita-me considerar todos os aspectos dessa questão... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "natural": {
+    "count": 2,
+    "contexts": [
+      {
+        "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "responda de forma mais natural",
+        "response": "Interessante, estou processando essa informação... Continuando nossa conversa sobre \"sim, não é para você...\""
+      }
+    ]
+  },
+  "responda": {
+    "count": 5,
+    "contexts": [
+      {
+        "message": "responda de forma mais natural",
+        "response": "Interessante, estou processando essa informação... Continuando nossa conversa sobre \"sim, não é para você...\""
+      },
+      {
+        "message": "responda",
+        "response": "Estou analisando essa questão..."
+      },
+      {
+        "message": "responda mais rapido",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "responda mais rapido",
+        "response": "Estou analisando essa questão... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "<@1413329608404635828> sempre responda mais rapido e mais eficientemente",
+        "response": "Estou analisando essa questão..."
+      }
+    ]
+  },
+  "quem": {
+    "count": 6,
+    "contexts": [
+      {
+        "message": "<@1413329608404635828> quem é vc?",
+        "response": "Permita-me considerar todos os aspectos dessa questão..."
+      },
+      {
+        "message": "quem é hegel?",
+        "response": "De uma perspectiva filosófica, poderíamos analisar isso como..."
+      },
+      {
+        "message": "<@1413329608404635828> quem é vc?",
+        "response": "Permita-me considerar todos os aspectos dessa questão..."
+      },
+      {
+        "message": "<@1413329608404635828> quem é vc?",
+        "response": "Estou elaborando uma resposta adequada... Continuando nossa conversa sobre \"explique mais...\""
+      },
+      {
+        "message": "quem é vc?",
+        "response": "Estou analisando essa questão..."
+      },
+      {
+        "message": "vc acredita que somos quem somos pelo que fazemos ou pelo nosso interior?",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"quem é vc?...\""
+      }
+    ]
+  },
+  "explique": {
+    "count": 2,
+    "contexts": [
+      {
+        "message": "explique a frase de karl marx: \"a historia é regida pela luta de classes\"",
+        "response": "Interessante, estou processando essa informação..."
+      },
+      {
+        "message": "explique mais",
+        "response": "Estou analisando essa questão... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "frase": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "explique a frase de karl marx: \"a historia é regida pela luta de classes\"",
+        "response": "Interessante, estou processando essa informação..."
+      }
+    ]
+  },
+  "karl": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "explique a frase de karl marx: \"a historia é regida pela luta de classes\"",
+        "response": "Interessante, estou processando essa informação..."
+      }
+    ]
+  },
+  "marx": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "explique a frase de karl marx: \"a historia é regida pela luta de classes\"",
+        "response": "Interessante, estou processando essa informação..."
+      }
+    ]
+  },
+  "historia": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "explique a frase de karl marx: \"a historia é regida pela luta de classes\"",
+        "response": "Interessante, estou processando essa informação..."
+      }
+    ]
+  },
+  "regida": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "explique a frase de karl marx: \"a historia é regida pela luta de classes\"",
+        "response": "Interessante, estou processando essa informação..."
+      }
+    ]
+  },
+  "pela": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "explique a frase de karl marx: \"a historia é regida pela luta de classes\"",
+        "response": "Interessante, estou processando essa informação..."
+      }
+    ]
+  },
+  "luta": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "explique a frase de karl marx: \"a historia é regida pela luta de classes\"",
+        "response": "Interessante, estou processando essa informação..."
+      }
+    ]
+  },
+  "classes": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "explique a frase de karl marx: \"a historia é regida pela luta de classes\"",
+        "response": "Interessante, estou processando essa informação..."
+      }
+    ]
+  },
+  "rapido": {
+    "count": 4,
+    "contexts": [
+      {
+        "message": "responda mais rapido",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "reflita mais rapido e mais eficiente",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "responda mais rapido",
+        "response": "Estou analisando essa questão... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "<@1413329608404635828> sempre responda mais rapido e mais eficientemente",
+        "response": "Estou analisando essa questão..."
+      }
+    ]
+  },
+  "hegel": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "quem é hegel?",
+        "response": "De uma perspectiva filosófica, poderíamos analisar isso como..."
+      }
+    ]
+  },
+  "fala": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "fala",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "reflita": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "reflita mais rapido e mais eficiente",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "eficiente": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "reflita mais rapido e mais eficiente",
+        "response": "Estou elaborando uma resposta adequada..."
+      }
+    ]
+  },
+  "quero": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "quero que vc se apresente",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"<@141332960840463582...\""
+      }
+    ]
+  },
+  "apresente": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "quero que vc se apresente",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"<@141332960840463582...\""
+      }
+    ]
+  },
+  "verifique": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "verifique o status do servidor",
+        "response": "Como entusiasta de Minecraft, posso dizer que..."
+      }
+    ]
+  },
+  "status": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "verifique o status do servidor",
+        "response": "Como entusiasta de Minecraft, posso dizer que..."
+      }
+    ]
+  },
+  "servidor": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "verifique o status do servidor",
+        "response": "Como entusiasta de Minecraft, posso dizer que..."
+      }
+    ]
+  },
+  "minecraft": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "o que é minecraft?",
+        "response": "Minha experiência com servidores de Minecraft me ensinou que..."
+      }
+    ]
+  },
+  "suas": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "melhore suas respostas",
+        "response": "Permita-me considerar todos os aspectos dessa questão..."
+      }
+    ]
+  },
+  "acredita": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "vc acredita que somos quem somos pelo que fazemos ou pelo nosso interior?",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"quem é vc?...\""
+      }
+    ]
+  },
+  "somos": {
+    "count": 2,
+    "contexts": [
+      {
+        "message": "vc acredita que somos quem somos pelo que fazemos ou pelo nosso interior?",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"quem é vc?...\""
+      },
+      {
+        "message": "vc acredita que somos quem somos pelo que fazemos ou pelo nosso interior?",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"quem é vc?...\""
+      }
+    ]
+  },
+  "pelo": {
+    "count": 2,
+    "contexts": [
+      {
+        "message": "vc acredita que somos quem somos pelo que fazemos ou pelo nosso interior?",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"quem é vc?...\""
+      },
+      {
+        "message": "vc acredita que somos quem somos pelo que fazemos ou pelo nosso interior?",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"quem é vc?...\""
+      }
+    ]
+  },
+  "fazemos": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "vc acredita que somos quem somos pelo que fazemos ou pelo nosso interior?",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"quem é vc?...\""
+      }
+    ]
+  },
+  "nosso": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "vc acredita que somos quem somos pelo que fazemos ou pelo nosso interior?",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"quem é vc?...\""
+      }
+    ]
+  },
+  "interior": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "vc acredita que somos quem somos pelo que fazemos ou pelo nosso interior?",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"quem é vc?...\""
+      }
+    ]
+  },
+  "responde": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "responde logo",
+        "response": "Deixe-me refletir sobre isso por um momento... Continuando nossa conversa sobre \"vc acredita que somo...\""
+      }
+    ]
+  },
+  "logo": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "responde logo",
+        "response": "Deixe-me refletir sobre isso por um momento... Continuando nossa conversa sobre \"vc acredita que somo...\""
+      }
+    ]
+  },
+  "sempre": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "<@1413329608404635828> sempre responda mais rapido e mais eficientemente",
+        "response": "Estou analisando essa questão..."
+      }
+    ]
+  },
+  "eficientemente": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "<@1413329608404635828> sempre responda mais rapido e mais eficientemente",
+        "response": "Estou analisando essa questão..."
+      }
+    ]
+  },
+  "crie": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "e crie respostas mais diferentes e personalizadas para cada contexto",
+        "response": "Permita-me considerar todos os aspectos dessa questão... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "personalizadas": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "e crie respostas mais diferentes e personalizadas para cada contexto",
+        "response": "Permita-me considerar todos os aspectos dessa questão... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "cada": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "e crie respostas mais diferentes e personalizadas para cada contexto",
+        "response": "Permita-me considerar todos os aspectos dessa questão... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "contexto": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "e crie respostas mais diferentes e personalizadas para cada contexto",
+        "response": "Permita-me considerar todos os aspectos dessa questão... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  }
+}

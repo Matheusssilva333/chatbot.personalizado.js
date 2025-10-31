@@ -1,0 +1,18 @@
+[
+  {
+    "id": "peak_hours",
+    "description": "Horários de pico à noite",
+    "action": {
+      "type": "server_status_check",
+      "message": "Estamos em horário de pico. Deseja que eu verifique o status do servidor?"
+    }
+  },
+  {
+    "id": "help_keywords",
+    "description": "Detecta intenção de pedir ajuda",
+    "action": {
+      "type": "offer_help",
+      "message": "Posso ajudar com instruções ou automatizações. Quer tentar uma solução agora?"
+    }
+  }
+]
