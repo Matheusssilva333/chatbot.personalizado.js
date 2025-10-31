@@ -145,9 +145,7 @@ GUILD_ID=
 
 Configurações de logging são feitas via `winston` em `src/utils/logger.js`. Logs são gravados em `logs/`.
 
-## Licença
 
-ISC
-=======
 
->>>>>>> 35f570493eec14761fdc00086a9a05166298b993
+
+
