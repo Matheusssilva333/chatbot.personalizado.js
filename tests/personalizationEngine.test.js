@@ -1,6 +1,6 @@
 // Testes básicos para o motor de personalização
-const { describe, it, expect } = require('vitest');
-const pe = require('../src/utils/personalizationEngine.js');
+import { describe, it, expect } from 'vitest';
+import pe from '../src/utils/personalizationEngine.js';
 
 describe('personalizationEngine', () => {
   it('inicializa e cria perfil ao rastrear mensagem', () => {

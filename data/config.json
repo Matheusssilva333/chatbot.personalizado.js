@@ -1,0 +1,10 @@
+{
+  "autoUpdate": false,
+  "updateSource": "git",
+  "updateBranch": "main",
+  "statusNotifyIntervalMinutes": 30,
+  "alertChannel": "",
+  "statusChannel": "",
+  "memoryLimitMB": 100,
+  "startupTimeoutMs": 5000
+}

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { LRUCache, normalizeText } = require('./cache');
 
 // Banco de dados de problemas comuns e soluções
 const problemsPath = path.join(__dirname, '../../data/problems.json');
@@ -78,6 +79,8 @@ let problemsDB = {
   }
 };
 
+const problemCache = new LRUCache(1000);
+
 // Inicializar o sistema de resolução de problemas
 function initProblemSolver() {
   try {
@@ -100,7 +103,10 @@ function initProblemSolver() {
 
 // Identificar problema com base na mensagem
 function identifyProblem(message) {
-  const lowerMessage = message.toLowerCase();
+  const lowerMessage = (message || '').toLowerCase();
+  const key = normalizeText(lowerMessage, 160);
+  const cached = problemCache.get(key);
+  if (cached !== undefined) return cached;
   let bestMatch = null;
   let highestScore = 0;
   
@@ -127,7 +133,9 @@ function identifyProblem(message) {
   });
   
   // Retornar problema identificado se pontuação for suficiente
-  return highestScore >= 2 ? bestMatch : null;
+  const result = highestScore >= 2 ? bestMatch : null;
+  problemCache.set(key, result);
+  return result;
 }
 
 // Gerar solução para o problema

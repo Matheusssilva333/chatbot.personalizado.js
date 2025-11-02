@@ -6,7 +6,7 @@ const patternsFile = path.join(dataDir, 'anticipation.json');
 
 const HELP_KEYWORDS = ['ajuda','como','não consigo','erro','problema','lag','status','servidor','online','conexão'];
 const SERVER_KEYWORDS = ['status','servidor','lag','jogadores','online','conexão'];
-const COOLDOWN_MS = 30 * 60 * 1000; // 30 minutos por canal/padrão
+let COOLDOWN_MS = 30 * 60 * 1000; // 30 minutos por canal/padrão (ajustável)
 
 // Controle simples de cooldown em memória
 let lastTriggered = {};
@@ -42,6 +42,16 @@ function initNeedsAnticipation() {
       if (Array.isArray(fileData)) patternsDB = fileData;
     } else {
       fs.writeFileSync(patternsFile, JSON.stringify(patternsDB, null, 2));
+    }
+    // Integrar ajuste automático se existir data/automation.json
+    const automationConfigPath = path.join(dataDir, 'automation.json');
+    if (fs.existsSync(automationConfigPath)) {
+      try {
+        const cfg = JSON.parse(fs.readFileSync(automationConfigPath, 'utf8'));
+        if (cfg && typeof cfg.anticipationCooldownMs === 'number' && cfg.anticipationCooldownMs > 0) {
+          COOLDOWN_MS = cfg.anticipationCooldownMs;
+        }
+      } catch {}
     }
   } catch (error) {
     console.error('Erro ao inicializar padrões de antecipação:', error);
@@ -99,4 +109,5 @@ module.exports = {
   anticipateNeeds,
   executeAnticipatedAction,
   addPattern
+  , setCooldown: (ms) => { if (typeof ms === 'number' && ms > 0) COOLDOWN_MS = ms; }
 };

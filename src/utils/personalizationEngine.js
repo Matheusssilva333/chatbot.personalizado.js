@@ -65,6 +65,9 @@ function ensureProfile(userId) {
       messageCount: 0,
       serverInterest: 0,
       stylePreference: 'pratico',
+      preferencesExplicit: {},
+      preferencesImplicit: {},
+      contextualData: { names: [], locations: [], interests: [] },
       lastUpdated: now,
       lastSeen: now,
       activeHours: Array(24).fill(0),
@@ -78,6 +81,8 @@ function ensureProfile(userId) {
       p.messageCount = 0;
       p.serverInterest = 0;
       p.activeHours = Array(24).fill(0);
+      p.preferencesImplicit = {};
+      p.contextualData = { names: [], locations: [], interests: [] };
       p.lastUpdated = now;
     }
   }
@@ -144,6 +149,29 @@ function recordOutcome(userId, outcome = {}) {
   }
 }
 
+function recordContextData(userId, data = {}) {
+  const p = ensureProfile(userId);
+  const cd = p.contextualData || { names: [], locations: [], interests: [] };
+  // Unique merges
+  const pushUnique = (arr, items) => {
+    const set = new Set(arr);
+    for (const it of items || []) {
+      const v = String(it || '').trim();
+      if (v && !set.has(v)) { arr.push(v); set.add(v); }
+    }
+    return arr;
+  };
+  pushUnique(cd.names, data.names || []);
+  pushUnique(cd.locations, data.locations || []);
+  pushUnique(cd.interests, data.interests || []);
+  p.contextualData = cd;
+  // Infer implicit preferences from interests
+  if ((data.interests || []).includes('filosofia')) p.preferencesImplicit.interesseIntelectual = true;
+  if ((data.interests || []).includes('minecraft')) p.preferencesImplicit.interesseTecnico = true;
+  p.lastUpdated = Date.now();
+  return p;
+}
+
 function getMetrics() {
   return { ...metrics, profilesCount: profiles.size };
 }
@@ -172,6 +200,7 @@ module.exports = {
   getUserProfile,
   getPersonalizationOptions,
   recordOutcome,
+   recordContextData,
   getMetrics,
   flushToDisk,
 };

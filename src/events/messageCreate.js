@@ -1,13 +1,21 @@
 const { Events } = require('discord.js');
 const { setupLogger } = require('../utils/logger');
 const { getRelevantContext, learnFromInteraction } = require('../utils/learningSystem');
+const { buildContext } = require('../conversation/contextEngine');
+const { rememberInteraction } = require('../conversation/memory');
+const { generateFormulations, computeDelayMs, applyTone } = require('../conversation/naturalness');
+const { isRepetitive, detectTopicShift } = require('../conversation/contextVerifier');
+const { runAutomations } = require('../automation/intelligentAutomation');
+const { recordProblematicInteraction } = require('../automation/selfImprovement');
 const { generateContextualResponse } = require('../utils/contextualResponses');
 const { enrichText, varyStructure } = require('../utils/linguisticVariety');
 const { identifyProblem, generateSolution } = require('../utils/problemSolver');
 const { anticipateNeeds, executeAnticipatedAction } = require('../utils/needsAnticipation');
 const { detectError, generateCorrection, logError } = require('../utils/selfCorrection');
 const { logInteraction } = require('../utils/performanceReports');
-const { getPersonalizationOptions, trackMessage, recordOutcome } = require('../utils/personalizationEngine');
+const { getPersonalizationOptions, trackMessage, recordOutcome, recordContextData } = require('../utils/personalizationEngine');
+const { extractEntities } = require('../conversation/entities');
+const { autoRespondStandardCases, routeToModule, scoreIntent } = require('../automation/automationRouter');
 
 const logger = setupLogger();
 
@@ -22,21 +30,45 @@ module.exports = {
     const conteudoLower = message.content.toLowerCase();
     const contemLuana = conteudoLower.includes('luana');
 
+    // Responder automaticamente casos padrão mesmo sem menção, com ruído controlado
+    try {
+      const auto = await autoRespondStandardCases(message.content, message.author.id, message.channel);
+      // Se já cuidamos com resposta automática e não houve menção, evitar duplicar
+      if (auto && !(isMentioned || contemLuana)) {
+        return;
+      }
+    } catch {}
+
     if (!(isMentioned || contemLuana)) return;
 
     const start = Date.now();
     try {
-      // Obter contexto relevante do sistema de aprendizado
-      const context = getRelevantContext(message.author.id, message.content);
+      // Obter contexto composto (memória + perfil + legado)
+      const contextLegacy = getRelevantContext(message.author.id, message.content);
+      const context = buildContext(message.author.id, message.content);
+
+      // Capturar dados contextuais (nomes, locais, interesses) no perfil
+      try {
+        const entities = extractEntities(message.content);
+        recordContextData(message.author.id, entities);
+        trackMessage(message.author.id, message.content, Date.now());
+      } catch {}
 
       // Gerar resposta contextualizada e enriquecer linguagem com personalização
       const pOpts = getPersonalizationOptions(message.author.id, message.content, context);
-      let resposta = generateContextualResponse(message.content, context, { estilo: pOpts.estilo || 'pratico' });
-      resposta = enrichText(resposta, pOpts.complexidade || 0.5);
-      resposta = varyStructure(resposta);
+      let respostaBase = generateContextualResponse(message.content, contextLegacy, { estilo: pOpts.estilo || 'pratico' });
+      respostaBase = enrichText(respostaBase, pOpts.complexidade || 0.5);
+      respostaBase = varyStructure(respostaBase);
+      let variantes = generateFormulations(respostaBase, { stylePreference: pOpts.estilo });
+      // Evitar repetição: se muito parecido com últimas respostas, escolha outra variante
+      if (isRepetitive(context.window, variantes[0])) {
+        variantes = variantes.reverse();
+      }
+      let resposta = applyTone(variantes[0], { stylePreference: pOpts.estilo }, context);
 
       await message.channel.sendTyping();
-      await new Promise(r => setTimeout(r, 1200));
+      const delay = computeDelayMs(pOpts.complexidade || 0.5, resposta.length);
+      await new Promise(r => setTimeout(r, delay));
       // Reply com fallback: se a referência da mensagem original for inválida (50035),
       // envia no canal sem referência para evitar erro DiscordAPIError[50035].
       try {
@@ -52,7 +84,8 @@ module.exports = {
       }
 
       // Aprender com a interação e atualizar preferência em memória
-      learnFromInteraction(message.author.id, message.content, resposta, context);
+      learnFromInteraction(message.author.id, message.content, resposta, contextLegacy);
+      rememberInteraction(message.author.id, message.content, resposta, { topics: context.topics });
       trackMessage(message.author.id, message.content, Date.now());
 
       // Antecipar necessidades e sugerir ação
@@ -73,6 +106,20 @@ module.exports = {
         }
       }
 
+      // Automação inteligente baseada em triggers
+      try {
+        await runAutomations(message.content, message.author.id, message.channel, context);
+      } catch {}
+      // Roteamento automatizado para módulos apropriados (não invasivo)
+      try {
+        const { intent } = scoreIntent(message.content);
+        const routed = routeToModule(intent, message.content, message.author.id, message.channel);
+        if (routed && routed.actionsPerformed && routed.actionsPerformed.length > 0) {
+          // Registrar apenas; evitar mensagens redundantes
+          logger.info(`Automação aplicou ações: ${routed.actionsPerformed.join(', ')}`);
+        }
+      } catch {}
+
       // Detectar possíveis erros e oferecer correção quando o usuário indicar
       const erroDetectado = detectError(message.content, null);
       if (erroDetectado) {
@@ -85,6 +132,13 @@ module.exports = {
       try {
         logInteraction({ type: 'conversation', responseTime, success: true });
         recordOutcome(message.author.id, { responseTimeMs: responseTime });
+        // Auto-aprimoramento: registrar problemas
+        if (responseTime > 2000) {
+          recordProblematicInteraction({ userId: message.author.id, message: message.content, response: resposta, responseTimeMs: responseTime, reason: 'lento' });
+        }
+        if (detectTopicShift(context.topics, message.content)) {
+          recordProblematicInteraction({ userId: message.author.id, message: message.content, response: resposta, responseTimeMs: responseTime, reason: 'mudanca_topico' });
+        }
       } catch (e) {
         // Telemetria não deve quebrar fluxo de resposta
         logger.warn('Falha ao registrar interação de desempenho.');

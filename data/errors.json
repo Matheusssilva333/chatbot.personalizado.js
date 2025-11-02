@@ -4,7 +4,7 @@
       "isso não está certo",
       "informação errada",
       "incorreto",
-      "não é verdade"
+      "não é verdade","errado"
     ],
     "responses": [
       "Peço desculpas pela informação incorreta. A informação correta é: {correction}",

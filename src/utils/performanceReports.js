@@ -103,6 +103,7 @@ function resetStatistics() {
 module.exports = {
   initPerformanceReports,
   logInteraction,
+  summarize,
   generateDailyReport,
   generateWeeklyReport,
   resetStatistics

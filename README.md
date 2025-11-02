@@ -1,7 +1,11 @@
 <<<<<<< HEAD
 # Bot Discord Luana
 
+<<<<<<< HEAD
 Bot Discord com personalidade intelectual, reflexiva e profundamente analítica, inspirado nas características da Luana.
+=======
+Bot Discord com personalidade intelectual, reflexiva e profundamente analítica, inspirado nas características do cliente.
+>>>>>>> 9aa804927846d7d0435e70583303d6d9757a833b
 
 ## Características da Luana
 
@@ -145,9 +149,16 @@ GUILD_ID=
 
 Configurações de logging são feitas via `winston` em `src/utils/logger.js`. Logs são gravados em `logs/`.
 
+<<<<<<< HEAD
 ## Licença
 
 ISC
 =======
 
 >>>>>>> 35f570493eec14761fdc00086a9a05166298b993
+=======
+
+
+
+
+>>>>>>> 9aa804927846d7d0435e70583303d6d9757a833b

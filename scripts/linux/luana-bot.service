@@ -1,0 +1,14 @@
+[Unit]
+Description=Luana Discord Bot
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/luana-bot
+ExecStart=/usr/bin/node /opt/luana-bot/scripts/start.js
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target

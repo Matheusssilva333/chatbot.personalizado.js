@@ -1,6 +1,6 @@
 {
   "1413329608404635828": {
-    "count": 8,
+    "count": 12,
     "contexts": [
       {
         "message": "<@1413329608404635828> oi",
@@ -33,6 +33,14 @@
       {
         "message": "<@1413329608404635828> sempre responda mais rapido e mais eficientemente",
         "response": "Estou analisando essa questão..."
+      },
+      {
+        "message": "<@1413329608404635828> quem é vc?",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"oi...\""
+      },
+      {
+        "message": "<@1413329608404635828> quem é vc?",
+        "response": "Estou elaborando uma resposta adequada..."
       }
     ]
   },
@@ -134,7 +142,7 @@
     ]
   },
   "você": {
-    "count": 2,
+    "count": 4,
     "contexts": [
       {
         "message": "agora você vai parar de repetir isso e vai dar respostas diferentes",
@@ -143,6 +151,14 @@
       {
         "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
         "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "Você é Luana, uma assistente virtual, do Discord",
+        "response": "Estou elaborando uma resposta adequada... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "você é luana, uma assistente virtual",
+        "response": "Deixe-me refletir sobre isso por um momento..."
       }
     ]
   },
@@ -294,11 +310,15 @@
     ]
   },
   "tudo": {
-    "count": 1,
+    "count": 2,
     "contexts": [
       {
         "message": "sim, não é para você repetir \"Acredito que devemos buscar um equilíbrio entre profundidade analítica e ação concreta nesse caso.\" junto com tudo, melhore isso e haja de forma mais natural",
         "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "<@1413329608404635828> bom dia, tudo bem?",
+        "response": "Permita-me considerar todos os aspectos dessa questão..."
       }
     ]
   },
@@ -396,7 +416,7 @@
     ]
   },
   "responda": {
-    "count": 5,
+    "count": 6,
     "contexts": [
       {
         "message": "responda de forma mais natural",
@@ -417,11 +437,15 @@
       {
         "message": "<@1413329608404635828> sempre responda mais rapido e mais eficientemente",
         "response": "Estou analisando essa questão..."
+      },
+      {
+        "message": "responda",
+        "response": "Interessante, estou processando essa informação... Lembro que conversamos sobre algo similar anteriormente."
       }
     ]
   },
   "quem": {
-    "count": 6,
+    "count": 10,
     "contexts": [
       {
         "message": "<@1413329608404635828> quem é vc?",
@@ -446,6 +470,22 @@
       {
         "message": "vc acredita que somos quem somos pelo que fazemos ou pelo nosso interior?",
         "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"quem é vc?...\""
+      },
+      {
+        "message": "<@1413329608404635828> quem é vc?",
+        "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"oi...\""
+      },
+      {
+        "message": "<@1413329608404635828> quem é vc?",
+        "response": "Estou elaborando uma resposta adequada..."
+      },
+      {
+        "message": "quem é vc? se apresente se",
+        "response": "Estou analisando essa questão..."
+      },
+      {
+        "message": "se apresente se descrevendo o que vc faz e quem vc é",
+        "response": "Permita-me considerar todos os aspectos dessa questão... Lembro que conversamos sobre algo similar anteriormente."
       }
     ]
   },
@@ -601,11 +641,19 @@
     ]
   },
   "apresente": {
-    "count": 1,
+    "count": 3,
     "contexts": [
       {
         "message": "quero que vc se apresente",
         "response": "Estou analisando essa questão... Continuando nossa conversa sobre \"<@141332960840463582...\""
+      },
+      {
+        "message": "quem é vc? se apresente se",
+        "response": "Estou analisando essa questão..."
+      },
+      {
+        "message": "se apresente se descrevendo o que vc faz e quem vc é",
+        "response": "Permita-me considerar todos os aspectos dessa questão... Lembro que conversamos sobre algo similar anteriormente."
       }
     ]
   },
@@ -785,6 +833,81 @@
       {
         "message": "e crie respostas mais diferentes e personalizadas para cada contexto",
         "response": "Permita-me considerar todos os aspectos dessa questão... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "entendi": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "entendi",
+        "response": "Estou analisando essa questão..."
+      }
+    ]
+  },
+  "luana": {
+    "count": 2,
+    "contexts": [
+      {
+        "message": "Você é Luana, uma assistente virtual, do Discord",
+        "response": "Estou elaborando uma resposta adequada... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "você é luana, uma assistente virtual",
+        "response": "Deixe-me refletir sobre isso por um momento..."
+      }
+    ]
+  },
+  "assistente": {
+    "count": 2,
+    "contexts": [
+      {
+        "message": "Você é Luana, uma assistente virtual, do Discord",
+        "response": "Estou elaborando uma resposta adequada... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "você é luana, uma assistente virtual",
+        "response": "Deixe-me refletir sobre isso por um momento..."
+      }
+    ]
+  },
+  "virtual": {
+    "count": 2,
+    "contexts": [
+      {
+        "message": "Você é Luana, uma assistente virtual, do Discord",
+        "response": "Estou elaborando uma resposta adequada... Lembro que conversamos sobre algo similar anteriormente."
+      },
+      {
+        "message": "você é luana, uma assistente virtual",
+        "response": "Deixe-me refletir sobre isso por um momento..."
+      }
+    ]
+  },
+  "discord": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "Você é Luana, uma assistente virtual, do Discord",
+        "response": "Estou elaborando uma resposta adequada... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "descrevendo": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "se apresente se descrevendo o que vc faz e quem vc é",
+        "response": "Permita-me considerar todos os aspectos dessa questão... Lembro que conversamos sobre algo similar anteriormente."
+      }
+    ]
+  },
+  "filosofia": {
+    "count": 1,
+    "contexts": [
+      {
+        "message": "<@1413329608404635828> o que é filosofia?",
+        "response": "Essa questão me lembra o pensamento de Hegel sobre... Lembro que conversamos sobre algo similar anteriormente."
       }
     ]
   }

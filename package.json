@@ -4,14 +4,24 @@
   "description": "Bot Discord Luana - Assistente de IA com personalidade intelectual e reflexiva",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node scripts/start.js",
     "dev": "nodemon src/index.js",
+    "dev:all": "concurrently -n bot,ui -c blue,green \"nodemon src/index.js\" \"vite\"",
     "ui": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "deploy:commands": "node src/deploy-commands.js"
   },
-  "keywords": ["bot", "ai", "discord", "luana", "minecraft", "xadrez", "filosofia"],
+  "keywords": [
+    "bot",
+    "ai",
+    "discord",
+    "luana",
+    "minecraft",
+    "xadrez",
+    "filosofia"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -26,6 +36,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
+    "concurrently": "^9.2.1",
     "nodemon": "^3.0.2",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",

@@ -1,0 +1,5 @@
+{
+  "anticipationCooldownMs": 960000,
+  "maxResponseTimeTargetMs": 1500,
+  "minSuccessRatePercent": 80
+}

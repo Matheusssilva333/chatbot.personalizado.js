@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
+const { LRUCache, normalizeText } = require('./cache');
 
 // Estrutura para armazenar dados de aprendizado
 let conversationPatterns = {};
 let userPreferences = {};
 let interactionHistory = {};
+const ctxCache = new LRUCache(500);
 
 // Caminho para o arquivo de dados
 const dataPath = path.join(__dirname, '../../data');
@@ -105,6 +107,10 @@ function saveData() {
 
 // Obter contexto relevante para uma nova mensagem
 function getRelevantContext(userId, message) {
+  const cacheKey = `${userId}|${normalizeText(message)}`;
+  const cached = ctxCache.get(cacheKey);
+  if (cached) return cached;
+
   const keywords = extractKeywords(message);
   const relevantPatterns = [];
 
@@ -119,11 +125,13 @@ function getRelevantContext(userId, message) {
   const userHistory = interactionHistory[userId] || [];
   const recentHistory = userHistory.slice(-5);
 
-  return {
+  const result = {
     patterns: relevantPatterns.slice(0, 3), // Limitar a 3 padrões mais relevantes
     history: recentHistory,
     preferences: userPreferences[userId] || {}
   };
+  ctxCache.set(cacheKey, result);
+  return result;
 }
 
 // Atualizar preferências do usuário

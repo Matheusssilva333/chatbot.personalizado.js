@@ -14,6 +14,7 @@ const { initSelfCorrection } = require('./utils/selfCorrection');
 const { initPerformanceReports, generateDailyReport } = require('./utils/performanceReports');
 const { initNeedsAnticipation } = require('./utils/needsAnticipation');
 const { initPersonalization, flushToDisk, getMetrics } = require('./utils/personalizationEngine');
+const { initScheduler } = require('./automation/scheduler');
 
 // Configuração do ambiente
 config();
@@ -87,6 +88,9 @@ client.once(Events.ClientReady, () => {
   initNeedsAnticipation();
   initPersonalization({ logsFilePath: path.join(__dirname, '../logs/combined.log') });
   logger.info('Módulos de aprendizado, respostas, variedade linguística, solução de problemas, auto-correção e relatórios inicializados.');
+
+  // Scheduler centralizado para automações recorrentes
+  initScheduler(client);
 
   // Agendar relatório diário básico
   setInterval(() => {
