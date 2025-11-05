@@ -15,10 +15,12 @@ const { initPerformanceReports, generateDailyReport } = require('./utils/perform
 const { initNeedsAnticipation } = require('./utils/needsAnticipation');
 const { initPersonalization, flushToDisk, getMetrics } = require('./utils/personalizationEngine');
 const { initScheduler } = require('./automation/scheduler');
+const ResponseGenerator = require('./conversation/responseGenerator');
 
 // Configuração do ambiente
 config();
 const logger = setupLogger();
+const responseGenerator = new ResponseGenerator();
 
 // Configuração do cliente Discord
 const client = new Client({
@@ -64,9 +66,9 @@ try {
     const event = require(filePath);
     
     if (event.once) {
-      client.once(event.name, (...args) => event.execute(...args));
+      client.once(event.name, (...args) => event.execute(...args, responseGenerator));
     } else {
-      client.on(event.name, (...args) => event.execute(...args));
+      client.on(event.name, (...args) => event.execute(...args, responseGenerator));
     }
     
     logger.info(`Evento carregado: ${event.name}`);

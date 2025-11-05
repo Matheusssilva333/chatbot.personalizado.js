@@ -29,4 +29,4 @@ function normalizeText(text, maxLen = 200) {
     .slice(0, maxLen);
 }
 
-module.exports = { LRUCache, normalizeText };
+export { LRUCache, normalizeText };

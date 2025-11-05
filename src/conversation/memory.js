@@ -1,4 +1,4 @@
-const MAX_INTERACTIONS = 10;
+const MAX_INTERACTIONS = 20;
 
 // userId -> [{ timestamp, message, response, topics: string[], meta: {} }]
 const memoryStore = new Map();
@@ -51,7 +51,7 @@ function getCurrentTopics(userId) {
   return Array.from(freq.entries()).sort((a, b) => b[1] - a[1]).map(([k]) => k);
 }
 
-module.exports = {
+export {
   rememberInteraction,
   getRecentInteractions,
   getCurrentTopics,

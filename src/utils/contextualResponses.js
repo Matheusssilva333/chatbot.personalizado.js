@@ -1,5 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Banco de dados de expressões linguísticas
 const expressionsPath = path.join(__dirname, '../../data/expressions.json');
@@ -82,27 +87,102 @@ function initExpressions() {
   }
 }
 
+// Garantir coerência com o propósito do bot (comandos core: filosofia, minecraft, moderação, xadrez)
+function ensureCoherence(response, context) {
+  const coreTopics = ['filosofia', 'minecraft', 'moderação', 'xadrez'];
+  const responseLower = response.toLowerCase();
+  const hasCoreReference = coreTopics.some(topic => responseLower.includes(topic));
+  const hasContextCoreTopic = context.topics && context.topics.some(topic => coreTopics.includes(topic.toLowerCase()));
+
+  // Se a resposta não mencionar tópicos core e o contexto não tiver tópicos core, redirecionar
+  if (!hasCoreReference && !hasContextCoreTopic) {
+    const redirects = [
+      "Posso ajudar com questões de filosofia, Minecraft, moderação ou xadrez. Qual desses temas te interessaria?",
+      "Meu foco é em filosofia, Minecraft, moderação e xadrez. Que tal explorar um desses temas?"
+    ];
+    return redirects[Math.floor(Math.random() * redirects.length)];
+  }
+
+  return response;
+}
+
+// Garantir relevância com o tópico discutido
+function ensureRelevance(response, context) {
+  if (!context.topics || context.topics.length === 0) return response;
+
+  const currentTopic = context.topics[0].toLowerCase();
+  const responseLower = response.toLowerCase();
+
+  // Se a resposta não for relevante para o tópico atual, ajustar
+  if (!responseLower.includes(currentTopic) && Math.random() < 0.6) {
+    return `${response} Vamos voltar ao tema de ${currentTopic}? Há algo mais que você gostaria de saber sobre isso?`;
+  }
+
+  return response;
+}
+
 // Gerar resposta contextualizada
 function generateContextualResponse(message, context, personality = {}) {
   // Extrair informações do contexto
-  const { patterns, history, preferences } = context;
-  
+  const { window, topics, thematicPatterns, sentiment, intent } = context;
+  const { history, preferences } = context.profile; // Assumindo que history e preferences estão dentro de profile
+
   // Determinar o tipo de resposta baseado no conteúdo da mensagem
   const messageType = determineMessageType(message);
-  
+
   // Selecionar expressão apropriada
   let response = selectExpression(messageType, personality);
-  
+
   // Personalizar resposta com base no histórico e preferências
   response = personalizeResponse(response, history, preferences);
-  
+
   // Adicionar contexto específico se disponível
-  if (patterns && patterns.length > 0) {
-    const relevantPattern = patterns[0];
+  if (thematicPatterns && thematicPatterns.length > 0) {
+    const relevantPattern = thematicPatterns[0]; // Usar o primeiro padrão temático como exemplo
     response = enrichResponseWithPattern(response, relevantPattern);
   }
-  
-  return response;
+
+  // Adaptar a resposta com base no sentimento e intenção
+  response = adaptResponseToContext(response, sentiment, intent, personality.estilo);
+
+  // Garantir coerência e relevância
+  response = ensureCoherence(response, context);
+  response = ensureRelevance(response, context);
+
+  // Gerar uma camada adicional de profundidade (pergunta de acompanhamento ou mais informações)
+  const followUp = generateFollowUp(message, context, personality);
+
+  return { response, followUp };
+}
+
+// Adaptar a resposta com base no sentimento, intenção e estilo do usuário
+function adaptResponseToContext(response, sentiment, intent, userStyle) {
+  let adaptedResponse = response;
+
+  // Ajustar tom com base no sentimento
+  if (sentiment && sentiment.overall === 'negative') {
+    adaptedResponse = `Entendo que você está chateado. ${adaptedResponse}`;
+  } else if (sentiment && sentiment.overall === 'positive') {
+    adaptedResponse = `Que bom! ${adaptedResponse}`;
+  }
+
+  // Ajustar estilo com base na intenção
+  if (intent === 'help') {
+    adaptedResponse = `Claro, estou aqui para ajudar! ${adaptedResponse}`;
+  } else if (intent === 'greeting') {
+    adaptedResponse = `Olá! ${adaptedResponse}`;
+  } else if (intent === 'farewell') {
+    adaptedResponse = `Até mais! ${adaptedResponse}`;
+  }
+
+  // Ajustar estilo com base na preferência do usuário
+  if (userStyle === 'intelectual') {
+    adaptedResponse = `De uma perspectiva mais aprofundada, ${adaptedResponse}`;
+  } else if (userStyle === 'pratico') {
+    adaptedResponse = `Direto ao ponto: ${adaptedResponse}`;
+  }
+
+  return adaptedResponse;
 }
 
 // Determinar o tipo de mensagem
@@ -154,7 +234,7 @@ function selectExpression(type, personality) {
 // Personalizar resposta com base no histórico e preferências
 function personalizeResponse(response, history, preferences) {
   // Adicionar nome do usuário se disponível nas preferências
-  if (preferences.name) {
+  if (preferences && preferences.name) {
     // 30% de chance de usar o nome na resposta
     if (Math.random() < 0.3) {
       response = response.replace(/\.$/, `, ${preferences.name}.`);
@@ -163,17 +243,44 @@ function personalizeResponse(response, history, preferences) {
       }
     }
   }
-  
+
   // Adicionar referência a interações anteriores se houver histórico
   if (history && history.length > 0) {
     const recentInteraction = history[history.length - 1];
-    
+
     // 20% de chance de referenciar interação anterior
     if (Math.random() < 0.2 && recentInteraction) {
-      response += ` Continuando nossa conversa sobre "${recentInteraction.message.substring(0, 20)}..."`;
+      response += ` Continuando nossa conversa sobre \"${recentInteraction.message.substring(0, 20)}...\"`;
     }
   }
-  
+
+  // Incorporar dados contextuais se disponíveis
+  if (preferences && preferences.contextualData && Object.keys(preferences.contextualData).length > 0) {
+    // Exemplo: se o usuário frequentemente fala sobre um tópico específico, o bot pode fazer uma menção
+    const topics = Object.keys(preferences.contextualData);
+    if (topics.length > 0 && Math.random() < 0.15) { // 15% de chance de mencionar um tópico contextual
+      const randomTopic = topics[Math.floor(Math.random() * topics.length)];
+      response += ` A propósito, você mencionou ${randomTopic} recentemente.`;
+    }
+  }
+
+  // Incorporar preferências implícitas
+  if (preferences && preferences.preferencesImplicit && preferences.preferencesImplicit.length > 0) {
+    // Exemplo: se o usuário tem uma preferência implícita por um estilo de resposta, o bot pode ajustar
+    if (Math.random() < 0.1) { // 10% de chance de ajustar com base em preferência implícita
+      const implicitPref = preferences.preferencesImplicit[0]; // Pegar a preferência mais forte
+      response += ` Pelo que percebo, você prefere uma abordagem ${implicitPref}.`;
+    }
+  }
+
+  // Referenciar comandos favoritos
+  if (preferences && preferences.favoriteCommands && preferences.favoriteCommands.length > 0) {
+    if (Math.random() < 0.1) { // 10% de chance de mencionar um comando favorito
+      const randomCommand = preferences.favoriteCommands[Math.floor(Math.random() * preferences.favoriteCommands.length)];
+      response += ` Lembrei que você gosta de usar o comando ${randomCommand}.`;
+    }
+  }
+
   return response;
 }
 
@@ -212,8 +319,45 @@ function addExpression(type, expression) {
   return false;
 }
 
-module.exports = {
+// Gerar pergunta de acompanhamento ou camada adicional de profundidade
+function generateFollowUp(message, context, personality = {}) {
+  const { sentiment, intent, topics } = context;
+  const random = Math.random();
+
+  // Se o sentimento for positivo e o tópico for interessante, fazer uma pergunta aberta
+  if (sentiment && sentiment.overall === 'positive' && topics && topics.length > 0 && random < 0.4) {
+    const topic = topics[Math.floor(Math.random() * topics.length)];
+    return `O que mais você gostaria de explorar sobre ${topic}?`;
+  }
+
+  // Se a intenção for de ajuda, oferecer mais detalhes
+  if (intent === 'help' && random < 0.3) {
+    return "Precisa de mais detalhes ou posso ajudar com algo específico?";
+  }
+
+  // Se a conversa estiver em um tópico específico, aprofundar
+  if (context.currentTopic && random < 0.2) {
+    return `Podemos aprofundar mais sobre ${context.currentTopic}?`;
+  }
+
+  // Perguntas abertas gerais para engajar
+  if (random < 0.15) {
+    const openQuestions = [
+      "O que você pensa sobre isso?",
+      "Qual a sua perspectiva?",
+      "Há algo mais que te intriga?"
+    ];
+    return openQuestions[Math.floor(Math.random() * openQuestions.length)];
+  }
+
+  return null; // Nenhuma camada adicional por padrão
+}
+
+export {
   initExpressions,
   generateContextualResponse,
-  addExpression
+  addExpression,
+  generateFollowUp,
+  ensureCoherence,
+  ensureRelevance
 };

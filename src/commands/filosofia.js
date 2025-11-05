@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from 'discord.js';
 
 const data = new SlashCommandBuilder()
   .setName('filosofia')
@@ -54,7 +54,7 @@ Esta postura exige rigor metodológico, honestidade intelectual e coragem para d
   }
 }
 
-module.exports = {
+export {
   data,
   execute
 };

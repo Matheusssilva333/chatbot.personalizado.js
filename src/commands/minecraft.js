@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from 'discord.js';
 
 const data = new SlashCommandBuilder()
   .setName('minecraft')
@@ -55,4 +55,4 @@ Espero que essas dicas sejam úteis! Se quiser discutir estratégias mais avanç
   }
 }
 
-module.exports = { data, execute };
+export { data, execute };

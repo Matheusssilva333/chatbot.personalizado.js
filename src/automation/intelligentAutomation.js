@@ -1,6 +1,7 @@
 const { setupLogger } = require('../utils/logger');
 const { logInteraction } = require('../utils/performanceReports');
 const { getUserProfile } = require('../utils/personalizationEngine');
+const { question } = require('../conversation/naturalness');
 
 const logger = setupLogger();
 
@@ -54,8 +55,8 @@ function evaluateTriggers(content, profile, contextWindow, topics) {
   }
 
   // Info collection when missing nouns: ask basic info
-  if (String(content).length < 15) {
-    triggers.push({ type: 'coleta_info' });
+  if (String(content).length < 15 && (!topics || topics.length === 0)) {
+    triggers.push({ type: 'coleta_info', data: { question: question('Poderia me dar mais detalhes?') } });
   }
 
   // Action confirmation keyword

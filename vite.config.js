@@ -12,5 +12,10 @@ export default defineConfig({
     outDir: 'dist',
     minify: 'terser',
     sourcemap: false
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    include: ['tests/**/*.mjs']
   }
 });

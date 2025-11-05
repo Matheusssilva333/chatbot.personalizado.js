@@ -15,12 +15,45 @@ const INTENT_KEYWORDS = {
   ajuda: ['ajuda', 'help', 'socorro'],
   erro: ['erro', 'bug', 'falha', 'quebrou'],
   saudacao: ['oi', 'olá', 'ola', 'hey', 'e aí'],
-  despedida: ['tchau', 'adeus', 'até logo']
+  despedida: ['tchau', 'adeus', 'até logo'],
 };
 
-function scoreIntent(message) {
+function scoreIntent(message, context) {
   const content = String(message || '').toLowerCase();
   let best = { intent: 'desconhecido', score: 0 };
+  const { history, preferences } = context;
+
+  // Priorizar intenções baseadas no histórico recente
+  if (history && history.length > 0) {
+    const recentInteraction = history[history.length - 1];
+    if (recentInteraction && recentInteraction.intent) {
+      // Aumentar a pontuação se a mensagem atual estiver relacionada à intenção recente
+      if (INTENT_KEYWORDS[recentInteraction.intent].some(keyword => content.includes(keyword))) {
+        best = { intent: recentInteraction.intent, score: best.score + 0.5 }; // Pequeno boost
+      }
+    }
+  }
+
+  // Priorizar intenções baseadas em preferências do usuário (comandos favoritos, tópicos contextuais)
+  if (preferences) {
+    if (preferences.favoriteCommands && preferences.favoriteCommands.length > 0) {
+      for (const cmd of preferences.favoriteCommands) {
+        if (content.includes(cmd.toLowerCase())) {
+          best = { intent: cmd, score: best.score + 0.7 }; // Boost maior para comandos favoritos
+          break;
+        }
+      }
+    }
+    if (preferences.contextualData) {
+      for (const topic in preferences.contextualData) {
+        if (content.includes(topic.toLowerCase())) {
+          best = { intent: topic, score: best.score + 0.6 }; // Boost para tópicos contextuais
+          break;
+        }
+      }
+    }
+  }
+
   for (const [intent, words] of Object.entries(INTENT_KEYWORDS)) {
     let s = 0;
     for (const w of words) {
@@ -35,8 +68,9 @@ function scoreIntent(message) {
   return best;
 }
 
-function routeToModule(intent, message, userId, channel) {
+function routeToModule(message, userId, channel) {
   const context = getRelevantContext(userId, message);
+  const { intent, score } = scoreIntent(message, context);
   const actions = { handled: false, response: null, actionsPerformed: [] };
 
   try {
@@ -90,6 +124,11 @@ function routeToModule(intent, message, userId, channel) {
       }
       case 'erro': {
         actions.response = 'Detectei possível erro. Se puder, descreva o problema que ocorreu para que eu sugira correções ou passos.';
+        actions.handled = true;
+        break;
+      }
+      case 'matheus_mode': {
+        actions.response = 'O comando "matheus mode" não está disponível ou foi desativado.';
         actions.handled = true;
         break;
       }

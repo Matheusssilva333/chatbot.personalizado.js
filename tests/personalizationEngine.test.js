@@ -1,6 +1,6 @@
 // Testes básicos para o motor de personalização
 import { describe, it, expect } from 'vitest';
-import pe from '../src/utils/personalizationEngine.js';
+import * as pe from '../src/utils/personalizationEngine.js';
 
 describe('personalizationEngine', () => {
   it('inicializa e cria perfil ao rastrear mensagem', () => {

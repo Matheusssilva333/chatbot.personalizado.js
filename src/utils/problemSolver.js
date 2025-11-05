@@ -1,6 +1,11 @@
-const fs = require('fs');
-const path = require('path');
-const { LRUCache, normalizeText } = require('./cache');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { LRUCache, normalizeText } from './cache.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Banco de dados de problemas comuns e soluções
 const problemsPath = path.join(__dirname, '../../data/problems.json');
@@ -257,7 +262,7 @@ function addProblem(problem) {
   }
 }
 
-module.exports = {
+export {
   initProblemSolver,
   identifyProblem,
   generateSolution,

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Bot Discord Luana - Assistente de IA com personalidade intelectual e reflexiva",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "start": "node scripts/start.js",
     "dev": "nodemon src/index.js",

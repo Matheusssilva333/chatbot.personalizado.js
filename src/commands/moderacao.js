@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
+import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
 
 const data = new SlashCommandBuilder()
   .setName('moderacao')
@@ -96,7 +96,4 @@ async function execute(interaction) {
   }
 }
 
-module.exports = {
-  data,
-  execute
-};
+export { data, execute };

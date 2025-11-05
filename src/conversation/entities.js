@@ -1,4 +1,4 @@
-const { extractTopics } = require('./memory');
+import { extractTopics } from './memory.js';
 
 function uniquePush(arr, items) {
   const set = new Set(arr);
@@ -51,7 +51,7 @@ function extractEntities(text = '') {
   };
 }
 
-module.exports = {
+export {
   extractEntities,
   extractNames,
   extractLocations,

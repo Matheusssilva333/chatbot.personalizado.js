@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+import { SlashCommandBuilder } from 'discord.js';
 
 const data = new SlashCommandBuilder()
   .setName('xadrez')
@@ -60,7 +60,4 @@ Carlsen representa a fusão ideal entre intuição e cálculo preciso, demonstra
   }
 }
 
-module.exports = {
-  data,
-  execute
-};
+export { data, execute };

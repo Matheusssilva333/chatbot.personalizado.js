@@ -1,5 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // In-memory stores
 const profiles = new Map(); // userId -> profile
@@ -121,15 +125,34 @@ function getUserProfile(userId) {
   return profiles.get(userId) || ensureProfile(userId);
 }
 
-function getPersonalizationOptions(userId, content, context) {
+function getPersonalizationOptions(userId, content, context, overallSentiment, intent) {
   metrics.personalizedCount += 1;
   const p = getUserProfile(userId);
   // complexity factor balances enrichment
   const complexity = Math.min(0.8, Math.max(0.2, p.avgMessageLength / 500));
+
+  let adaptiveStyle = p.stylePreference || 'pratico';
+
+  // Ajustar o estilo adaptativo com base no sentimento e intenção
+  if (overallSentiment === 'very positive') {
+    adaptiveStyle = 'entusiasmado';
+  } else if (overallSentiment === 'very negative') {
+    adaptiveStyle = 'cauteloso';
+  } else if (intent === 'help') {
+    adaptiveStyle = 'direto';
+  } else if (intent === 'question') {
+    adaptiveStyle = 'informativo';
+  }
+
   return {
-    estilo: p.stylePreference || 'pratico',
+    estilo: adaptiveStyle,
     complexidade: complexity,
     contextoGlobal: mostActiveGlobalHour(),
+    contextualData: p.contextualData,
+    preferencesImplicit: p.preferencesImplicit,
+    favoriteCommands: p.favoriteCommands,
+    sentiment: overallSentiment,
+    intent: intent,
   };
 }
 
@@ -192,7 +215,7 @@ function flushToDisk() {
   }
 }
 
-module.exports = {
+export {
   initPersonalization,
   analyzeLogsOnce,
   trackMessage,
@@ -200,7 +223,7 @@ module.exports = {
   getUserProfile,
   getPersonalizationOptions,
   recordOutcome,
-   recordContextData,
+  recordContextData,
   getMetrics,
   flushToDisk,
 };

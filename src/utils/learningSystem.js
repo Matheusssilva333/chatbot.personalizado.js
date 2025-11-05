@@ -1,6 +1,11 @@
-const fs = require('fs');
-const path = require('path');
-const { LRUCache, normalizeText } = require('./cache');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { LRUCache, normalizeText } from './cache.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Estrutura para armazenar dados de aprendizado
 let conversationPatterns = {};
@@ -168,7 +173,7 @@ function generateLearningReport() {
   };
 }
 
-module.exports = {
+export {
   initLearningSystem,
   learnFromInteraction,
   getRelevantContext,

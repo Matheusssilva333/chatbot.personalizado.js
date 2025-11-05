@@ -32,7 +32,12 @@ Este documento descreve a arquitetura, módulos e métricas do novo sistema de c
 ## Naturalidade na Conversação
 - Variação linguística: 5+ formulações por resposta, ajustadas por perfil.
 - Timing: simula pausas naturais (0,5–1,5s para simples; maior para complexas).
-- Tom de voz: mantém coerência, ajusta formalidade e aplica auto‑correções.
+- Tom de voz: mantém coerência, ajusta formalidade e aplica auto‑correções, adaptando-se ao estilo de comunicação do usuário (formal/informal).
+
+## Coesão Temática
+- Utiliza `data/patterns.json` para carregar padrões temáticos.
+- Integra padrões temáticos no contexto da conversa para enriquecer as respostas.
+- Ajuda a manter a conversa focada e relevante ao tópico atual.
 
 ## Verificação de Contexto
 - Evita repetição com detector de similaridade textual.

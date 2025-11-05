@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-const { evaluateTriggers } = require('../src/automation/intelligentAutomation');
+import { evaluateTriggers } from '../src/automation/intelligentAutomation';
 
 describe('Triggers de automação', () => {
   it('detecta FAQ de minecraft com alta confiança', () => {
