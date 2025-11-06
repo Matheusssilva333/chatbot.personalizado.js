@@ -5,7 +5,7 @@ Bot Discord com personalidade intelectual, reflexiva e profundamente analítica,
 
 - **Personalidade**: Intelectual, reflexiva, analítica e com forte pensamento crítico
 - **Interesses**: Minecraft, filosofia, xadrez, anime, moderação de Discord
-- **Experiência**: Staff do youtuber Seraf por 2 anos, gestão de comunidades Discord
+- **Experiência**: Staff de comunidades discord por + de 2 anos, gestão de comunidades Discord
 - **Estilo de pensamento**: Ensaístico, sistêmico, rigoroso metodologicamente
 
 ## Funcionalidades Implementadas
