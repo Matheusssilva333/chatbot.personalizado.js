@@ -8,14 +8,14 @@ const path = require('path');
 const { setupLogger } = require('./utils/logger');
 const { initLearningSystem } = require('./utils/learningSystem');
 const { initExpressions } = require('./utils/contextualResponses');
-const { initLinguisticVariety } = require('./utils/linguisticVariety');
+const { initLinguisticVariety } = require('./utils/linguisticVariety.cjs');
 const { initProblemSolver } = require('./utils/problemSolver');
-const { initSelfCorrection } = require('./utils/selfCorrection');
+const { initSelfCorrection } = require('./utils/selfCorrection.cjs');
 const { initPerformanceReports, generateDailyReport } = require('./utils/performanceReports');
-const { initNeedsAnticipation } = require('./utils/needsAnticipation');
+const { initNeedsAnticipation } = require('./utils/needsAnticipation.cjs');
 const { initPersonalization, flushToDisk, getMetrics } = require('./utils/personalizationEngine');
-const { initScheduler } = require('./automation/scheduler');
-const ResponseGenerator = require('./conversation/responseGenerator');
+const { initScheduler } = require('./automation/scheduler.cjs');
+const ResponseGenerator = require(path.join(__dirname, 'conversation', 'responseGenerator.cjs'));
 
 // Configuração do ambiente
 config();
@@ -66,9 +66,9 @@ try {
     const event = require(filePath);
     
     if (event.once) {
-      client.once(event.name, (...args) => event.execute(...args, responseGenerator));
+      client.once(event.name, (...args) => event.execute(...args, require(path.join(__dirname, 'conversation', 'responseGenerator.cjs'))));
     } else {
-      client.on(event.name, (...args) => event.execute(...args, responseGenerator));
+      client.on(event.name, (...args) => event.execute(...args, require(path.join(__dirname, 'conversation', 'responseGenerator.cjs'))));
     }
     
     logger.info(`Evento carregado: ${event.name}`);

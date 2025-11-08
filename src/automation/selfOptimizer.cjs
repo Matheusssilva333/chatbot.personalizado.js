@@ -3,7 +3,7 @@ const path = require('path');
 const { setupLogger } = require('../utils/logger');
 const { summarize } = require('../utils/performanceReports');
 const { addExpression } = require('../utils/contextualResponses');
-const { setCooldown } = require('../utils/needsAnticipation');
+const { setCooldown } = require('../utils/needsAnticipation.cjs');
 
 const logger = setupLogger();
 const configPath = path.join(__dirname, '../../data/automation.json');

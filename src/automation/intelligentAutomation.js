@@ -1,7 +1,7 @@
 const { setupLogger } = require('../utils/logger');
 const { logInteraction } = require('../utils/performanceReports');
 const { getUserProfile } = require('../utils/personalizationEngine');
-const { question } = require('../conversation/naturalness');
+const { question } = require('../conversation/naturalness.cjs');
 
 const logger = setupLogger();
 

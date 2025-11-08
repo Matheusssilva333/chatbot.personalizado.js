@@ -2,16 +2,16 @@
   "name": "bot-luana",
   "version": "1.0.0",
   "description": "Bot Discord Luana - Assistente de IA com personalidade intelectual e reflexiva",
-  "main": "src/index.js",
+  "main": "src/index.cjs",
   "type": "module",
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "node scripts/start.cjs",
     "dev": "nodemon src/index.js",
     "dev:all": "concurrently -n bot,ui -c blue,green \"nodemon src/index.js\" \"vite\"",
     "ui": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest --run --reporter=verbose",
     "deploy:commands": "node src/deploy-commands.js"
   },
   "keywords": [

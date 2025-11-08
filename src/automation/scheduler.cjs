@@ -1,9 +1,9 @@
 const { setupLogger } = require('../utils/logger');
 const { generateDailyReport, generateWeeklyReport } = require('../utils/performanceReports');
-const { optimizeParameters } = require('./selfOptimizer');
-const { checkAndAlert } = require('./alerts');
-const { notifyStatus } = require('./statusNotifier');
-const { monitorResources } = require('./processMonitor');
+const { optimizeParameters } = require('./selfOptimizer.cjs');
+const { checkAndAlert } = require('./alerts.cjs');
+const { notifyStatus } = require('./statusNotifier.cjs');
+const { monitorResources } = require('./processMonitor.cjs');
 const fs = require('fs');
 const path = require('path');
 

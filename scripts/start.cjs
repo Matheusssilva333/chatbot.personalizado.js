@@ -16,7 +16,7 @@ let backoffMs = 1000; // 1s inicial
 
 function startBot() {
   log('Iniciando bot via wrapper.');
-  const child = spawn(process.execPath, [path.join(__dirname, '../src/index.js')], {
+  const child = spawn(process.execPath, [path.join(__dirname, '../src/index.cjs')], {
     stdio: ['ignore', 'inherit', 'inherit'],
     env: process.env,
   });

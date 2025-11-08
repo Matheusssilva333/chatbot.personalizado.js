@@ -1,6 +1,6 @@
 const { Events } = require('discord.js');
 const { setupLogger } = require('../utils/logger');
-const { checkAndAlert } = require('../automation/alerts');
+const { checkAndAlert } = require('../automation/alerts.cjs');
 
 const logger = setupLogger();
 

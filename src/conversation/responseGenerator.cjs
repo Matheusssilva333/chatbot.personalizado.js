@@ -1,7 +1,7 @@
 const { setupLogger } = require('../utils/logger');
 const { recognizeIntent } = require('./intentRecognizer');
 const { analyzeSentiment } = require('./sentimentAnalyzer');
-const { getTransitionalPhrase } = require('./naturalness');
+const { getTransitionalPhrase } = require('./naturalness.cjs');
 const { isRepetitive } = require('./contextVerifier');
 const { evaluateTriggers } = require('../automation/intelligentAutomation');
 
