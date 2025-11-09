@@ -1,6 +1,6 @@
-const os = require('os');
-const { setupLogger } = require('../utils/logger');
-const { summarize } = require('../utils/performanceReports');
+import os from 'os';
+import { setupLogger } from '../utils/logger.js';
+import { summarize } from '../utils/performanceReports.js';
 
 const logger = setupLogger();
 
@@ -9,7 +9,7 @@ function formatBytes(bytes) {
   return `${mb.toFixed(1)}MB`;
 }
 
-function notifyStatus(client) {
+export function notifyStatus(client) {
   try {
     const sum = summarize();
     const mem = process.memoryUsage();
@@ -26,5 +26,3 @@ function notifyStatus(client) {
     logger.warn('Falha ao notificar status.');
   }
 }
-
-module.exports = { notifyStatus };

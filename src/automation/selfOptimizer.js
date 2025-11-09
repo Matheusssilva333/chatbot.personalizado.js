@@ -1,9 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const { setupLogger } = require('../utils/logger');
-const { summarize } = require('../utils/performanceReports');
-const { addExpression } = require('../utils/contextualResponses');
-const { setCooldown } = require('../utils/needsAnticipation.cjs');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { setupLogger } from '../utils/logger.js';
+import { summarize } from '../utils/performanceReports.js';
+import { addExpression } from '../utils/contextualResponses.js';
+import { setCooldown } from '../utils/needsAnticipation.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const logger = setupLogger();
 const configPath = path.join(__dirname, '../../data/automation.json');
@@ -63,4 +67,4 @@ function optimizeParameters() {
   }
 }
 
-module.exports = { optimizeParameters };
+export { optimizeParameters };

@@ -1,11 +1,11 @@
-const { Events } = require('discord.js');
-const { setupLogger } = require('../utils/logger');
-const { logInteraction } = require('../utils/performanceReports');
-const { trackCommandUsage } = require('../utils/personalizationEngine');
+import { Events } from 'discord.js';
+import { setupLogger } from '../utils/logger.js';
+import { logInteraction } from '../utils/performanceReports.js';
+import { trackCommandUsage } from '../utils/personalizationEngine.js';
 
 const logger = setupLogger();
 
-module.exports = {
+export default {
   name: Events.InteractionCreate,
   once: false,
   execute: async function (interaction) {

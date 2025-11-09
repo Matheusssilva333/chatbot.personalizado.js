@@ -54,7 +54,7 @@ Esta postura exige rigor metodológico, honestidade intelectual e coragem para d
   }
 }
 
-export {
+export default {
   data,
   execute
 };

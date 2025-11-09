@@ -1,5 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Banco de dados de sinônimos e variações linguísticas
 const synonymsPath = path.join(__dirname, '../../data/synonyms.json');
@@ -284,10 +288,11 @@ function addSynonym(word, synonym) {
   return false;
 }
 
-module.exports = {
+export {
   initLinguisticVariety,
   enrichText,
   varyStructure,
   addSynonym,
-  addCreativeFlair
+  addCreativeFlair,
+  synonymsDB
 };

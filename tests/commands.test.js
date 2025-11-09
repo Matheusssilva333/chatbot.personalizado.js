@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Load command modules
-const minecraft = require('../src/commands/minecraft');
-const filosofia = require('../src/commands/filosofia');
-const xadrez = require('../src/commands/xadrez');
-const moderacao = require('../src/commands/moderacao');
+import minecraft from '../src/commands/minecraft/index.js';
+import filosofia from '../src/commands/filosofia/index.js';
+import xadrez from '../src/commands/xadrez/index.js';
+import moderacao from '../src/commands/moderacao/index.js';
 
 function createInteractionMock({ subcommand, options = {} }) {
   const replies = [];

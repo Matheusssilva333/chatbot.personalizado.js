@@ -1,6 +1,6 @@
-const { extractTopics } = require('./memory');
+import { extractTopics } from './memory.js';
 
-function isRepetitive(latestWindow = [], candidate = '') {
+export function isRepetitive(latestWindow = [], candidate = '') {
   const c = String(candidate || '').toLowerCase().replace(/\s+/g, ' ').trim();
   if (!c) return false;
   for (const e of latestWindow) {
@@ -21,15 +21,10 @@ function jaccard(a, b) {
   return union === 0 ? 0 : inter / union;
 }
 
-function detectTopicShift(previousTopics = [], message = '') {
+export function detectTopicShift(previousTopics = [], message = '') {
   const now = extractTopics(message);
   // topic shift if dominant topic differs
   const prev = (previousTopics && previousTopics[0]) || null;
   const curr = (now && now[0]) || null;
   return prev && curr && prev !== curr;
 }
-
-module.exports = {
-  isRepetitive,
-  detectTopicShift,
-};

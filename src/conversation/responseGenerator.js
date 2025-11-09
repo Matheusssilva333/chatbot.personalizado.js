@@ -1,13 +1,13 @@
-const { setupLogger } = require('../utils/logger');
-const { recognizeIntent } = require('./intentRecognizer');
-const { analyzeSentiment } = require('./sentimentAnalyzer');
-const { getTransitionalPhrase } = require('./naturalness.cjs');
-const { isRepetitive } = require('./contextVerifier');
-const { evaluateTriggers } = require('../automation/intelligentAutomation');
+import { setupLogger } from '../utils/logger.js';
+import { recognizeIntent } from './intentRecognizer.js';
+import { analyzeSentiment } from './sentimentAnalyzer.js';
+import { getTransitionalPhrase } from './naturalness.js';
+import { isRepetitive } from './contextVerifier.js';
+import { evaluateTriggers } from '../automation/intelligentAutomation.js';
 
 const logger = setupLogger();
 
-class ResponseGenerator {
+export default class ResponseGenerator {
   constructor() {
     logger.info('ResponseGenerator inicializado.');
   }
@@ -22,7 +22,7 @@ class ResponseGenerator {
     const coletaInfoTrigger = triggers.find(t => t.type === 'coleta_info');
 
     let baseResponse;
-    if (coletaInfoTrigger) {
+    if (coletaInfoTrigger && coletaInfoTrigger.data) {
       baseResponse = coletaInfoTrigger.data.question;
     } else {
       // Gerar uma resposta base com base na intenção, sentimento e histórico
@@ -119,5 +119,3 @@ class ResponseGenerator {
     }
   }
 }
-
-module.exports = ResponseGenerator;

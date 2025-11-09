@@ -1,9 +1,9 @@
-const { setupLogger } = require('../utils/logger');
-const { summarize } = require('../utils/performanceReports');
+import { setupLogger } from '../utils/logger.js';
+import { summarize } from '../utils/performanceReports.js';
 
 const logger = setupLogger();
 
-function checkAndAlert(client) {
+export function checkAndAlert(client) {
   try {
     const summary = summarize();
     const { successRatePercent, responseTimeMs } = summary.averages;
@@ -36,5 +36,3 @@ function checkAndAlert(client) {
     logger.warn('Falha ao gerar alertas automáticos.');
   }
 }
-
-module.exports = { checkAndAlert };

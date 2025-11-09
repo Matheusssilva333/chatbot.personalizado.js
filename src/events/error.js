@@ -1,10 +1,10 @@
-const { Events } = require('discord.js');
-const { setupLogger } = require('../utils/logger');
-const { checkAndAlert } = require('../automation/alerts.cjs');
+import { Events } from 'discord.js';
+import { setupLogger } from '../utils/logger.js';
+import { checkAndAlert } from '../automation/alerts.js';
 
 const logger = setupLogger();
 
-module.exports = {
+export default {
   name: Events.Error,
   once: false,
   execute: async function (error) {

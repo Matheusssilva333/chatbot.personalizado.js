@@ -1,7 +1,7 @@
-const { setupLogger } = require('../utils/logger');
-const { logInteraction } = require('../utils/performanceReports');
-const { getUserProfile } = require('../utils/personalizationEngine');
-const { question } = require('../conversation/naturalness.cjs');
+import { setupLogger } from '../utils/logger.js';
+import { logInteraction } from '../utils/performanceReports.js';
+import { getUserProfile } from '../utils/personalizationEngine.js';
+import { question } from '../conversation/naturalness.js';
 
 const logger = setupLogger();
 
@@ -46,12 +46,12 @@ function evaluateTriggers(content, profile, contextWindow, topics) {
 
   // Standard orders (placeholder): detect "pedido" keyword
   if (String(content).toLowerCase().includes('pedido')) {
-    triggers.push({ type: 'pedido_padrao' });
+    triggers.push({ type: 'pedido_padrao', data: {} });
   }
 
   // Routing to specialized sectors by topics
   if (Array.isArray(topics) && topics.includes('moderacao')) {
-    triggers.push({ type: 'roteamento', target: 'moderacao' });
+    triggers.push({ type: 'roteamento', target: 'moderacao', data: {} });
   }
 
   // Info collection when missing nouns: ask basic info
@@ -61,7 +61,7 @@ function evaluateTriggers(content, profile, contextWindow, topics) {
 
   // Action confirmation keyword
   if (/confirm(a|ar)/i.test(content)) {
-    triggers.push({ type: 'confirmacao' });
+    triggers.push({ type: 'confirmacao', data: {} });
   }
 
   return triggers;
@@ -76,6 +76,10 @@ async function runAutomations(content, userId, channel, context) {
     try {
       switch (t.type) {
         case 'faq': {
+          if (!t.data || !t.data.faq) {
+            logger.warn('FAQ data is undefined or null, skipping.');
+            break;
+          }
           const replies = t.data.faq.replies;
           const variant = replies[performed.length % replies.length];
           await channel.sendTyping();
@@ -95,11 +99,19 @@ async function runAutomations(content, userId, channel, context) {
           break;
         }
         case 'coleta_info': {
+          if (!t.data || !t.data.question) {
+            logger.warn('Coleta info data is undefined or null, skipping.');
+            break;
+          }
           await channel.send('Você pode compartilhar mais detalhes para eu ajudar melhor?');
           performed.push('coleta');
           break;
         }
         case 'confirmacao': {
+          if (!t.data) {
+            logger.warn('Confirmacao data is undefined or null, skipping.');
+            break;
+          }
           await channel.send('Confirmado. Deseja prosseguir com esta ação?');
           performed.push('confirmacao');
           break;
@@ -116,7 +128,7 @@ async function runAutomations(content, userId, channel, context) {
   return performed;
 }
 
-module.exports = {
+export {
   evaluateTriggers,
   runAutomations,
 };

@@ -1,9 +1,9 @@
-const { getRelevantContext } = require('../utils/learningSystem');
-const { getUserProfile } = require('../utils/personalizationEngine');
-const { getRecentInteractions, getCurrentTopics } = require('./memory');
-const { initThematicCohesion, getThematicPatterns } = require('../utils/thematicCohesion');
-const { analyzeSentiment } = require('./sentimentAnalyzer');
-const { recognizeIntent } = require('./intentRecognizer');
+import { getRelevantContext } from '../utils/learningSystem.js';
+import { getUserProfile } from '../utils/personalizationEngine.js';
+import { getRecentInteractions, getCurrentTopics } from './memory.js';
+import { initThematicCohesion, getThematicPatterns } from '../utils/thematicCohesion.js';
+import { analyzeSentiment } from './sentimentAnalyzer.js';
+import { recognizeIntent } from './intentRecognizer.js';
 
 // Inicializar coesões temáticas ao carregar o módulo
 initThematicCohesion();
@@ -28,6 +28,6 @@ function buildContext(userId, message) {
   };
 }
 
-module.exports = {
+export {
   buildContext,
 };

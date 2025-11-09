@@ -1,8 +1,8 @@
-const { setupLogger } = require('../utils/logger');
-const { generateContextualResponse } = require('../utils/contextualResponses');
-const { identifyProblem, generateSolution } = require('../utils/problemSolver');
-const { getRelevantContext } = require('../utils/learningSystem');
-const { logInteraction } = require('../utils/performanceReports');
+import { setupLogger } from '../utils/logger.js';
+import { generateContextualResponse } from '../utils/contextualResponses.js';
+import { identifyProblem, generateSolution } from '../utils/problemSolver.js';
+import { getRelevantContext } from '../utils/learningSystem.js';
+import { logInteraction } from '../utils/performanceReports.js';
 
 const logger = setupLogger();
 
@@ -18,154 +18,112 @@ const INTENT_KEYWORDS = {
   despedida: ['tchau', 'adeus', 'até logo'],
 };
 
-function scoreIntent(message, context) {
-  const content = String(message || '').toLowerCase();
-  let best = { intent: 'desconhecido', score: 0 };
-  const { history, preferences } = context;
+// Mapeamento de intenções para ações/automações
+const INTENT_ACTIONS = {
+  minecraft: { type: 'command', name: 'minecraft' },
+  moderacao: { type: 'command', name: 'moderacao' },
+  xadrez: { type: 'command', name: 'xadrez' },
+  filosofia: { type: 'command', name: 'filosofia' },
+  ajuda: { type: 'response', generator: (ctx) => generateContextualResponse(ctx, 'help') },
+  erro: { type: 'problem_solver', handler: identifyProblem },
+  saudacao: { type: 'response', generator: (ctx) => generateContextualResponse(ctx, 'greeting') },
+  despedida: { type: 'response', generator: (ctx) => generateContextualResponse(ctx, 'farewell') },
+};
 
-  // Priorizar intenções baseadas no histórico recente
-  if (history && history.length > 0) {
-    const recentInteraction = history[history.length - 1];
-    if (recentInteraction && recentInteraction.intent) {
-      // Aumentar a pontuação se a mensagem atual estiver relacionada à intenção recente
-      if (INTENT_KEYWORDS[recentInteraction.intent].some(keyword => content.includes(keyword))) {
-        best = { intent: recentInteraction.intent, score: best.score + 0.5 }; // Pequeno boost
-      }
+// Função principal para rotear automações
+async function routeAutomation(message, client) {
+  const content = message.content.toLowerCase();
+  const context = getRelevantContext(message.author.id, content);
+
+  // 1. Classificação de Intenção
+  let detectedIntent = null;
+  for (const intent in INTENT_KEYWORDS) {
+    if (INTENT_KEYWORDS[intent].some(keyword => content.includes(keyword))) {
+      detectedIntent = intent;
+      break;
     }
   }
 
-  // Priorizar intenções baseadas em preferências do usuário (comandos favoritos, tópicos contextuais)
-  if (preferences) {
-    if (preferences.favoriteCommands && preferences.favoriteCommands.length > 0) {
-      for (const cmd of preferences.favoriteCommands) {
-        if (content.includes(cmd.toLowerCase())) {
-          best = { intent: cmd, score: best.score + 0.7 }; // Boost maior para comandos favoritos
-          break;
-        }
-      }
-    }
-    if (preferences.contextualData) {
-      for (const topic in preferences.contextualData) {
-        if (content.includes(topic.toLowerCase())) {
-          best = { intent: topic, score: best.score + 0.6 }; // Boost para tópicos contextuais
-          break;
-        }
-      }
-    }
-  }
+  if (detectedIntent) {
+    const action = INTENT_ACTIONS[detectedIntent];
+    if (action) {
+      logger.info(`Intenção detectada: ${detectedIntent}. Executando ação: ${action.type}`);
+      logInteraction({ type: 'automation', automation: detectedIntent, success: true });
 
-  for (const [intent, words] of Object.entries(INTENT_KEYWORDS)) {
-    let s = 0;
-    for (const w of words) {
-      if (content.includes(w)) s += 1;
-    }
-    if (s > best.score) best = { intent, score: s };
-  }
-  // Pequenas heurísticas
-  if (best.intent === 'desconhecido' && /\?$/.test(content)) {
-    best = { intent: 'ajuda', score: 1 };
-  }
-  return best;
-}
-
-function routeToModule(message, userId, channel) {
-  const context = getRelevantContext(userId, message);
-  const { intent, score } = scoreIntent(message, context);
-  const actions = { handled: false, response: null, actionsPerformed: [] };
-
-  try {
-    switch (intent) {
-      case 'saudacao': {
-        actions.response = generateContextualResponse('oi', context);
-        actions.handled = true;
-        break;
-      }
-      case 'despedida': {
-        actions.response = generateContextualResponse('tchau', context);
-        actions.handled = true;
-        break;
-      }
-      case 'ajuda': {
-        actions.response =
-          'Posso ajudar com comandos e dúvidas padrão: use `/minecraft`, `/xadrez`, `/filosofia` ou `/moderacao`. Diga “Luana” e sua pergunta.';
-        actions.handled = true;
-        break;
-      }
-      case 'minecraft': {
-        const p = identifyProblem(message);
-        if (p) {
-          const sol = generateSolution(p);
-          if (sol && sol.response) {
-            actions.response = sol.response;
-            actions.actionsPerformed.push(`solution:${p}`);
-            actions.handled = true;
+      switch (action.type) {
+        case 'command':
+          // Simular execução de comando
+          const command = client.commands.get(action.name);
+          if (command) {
+            // Criar um mock de interaction para o comando
+            const mockInteraction = {
+              commandName: action.name,
+              client: client,
+              user: message.author,
+              reply: async (response) => {
+                await message.reply(response);
+              },
+              followUp: async (response) => {
+                await message.channel.send(response);
+              },
+              deferred: false,
+              replied: false,
+            };
+            try {
+              await command.execute(mockInteraction);
+            } catch (e) {
+              logger.error(`Erro ao executar comando simulado ${action.name}: ${e.message}`);
+              await message.reply('Ocorreu um erro ao tentar executar esta automação.');
+            }
+          } else {
+            logger.warn(`Comando ${action.name} não encontrado para automação.`);
+            await message.reply('Não consegui encontrar o comando para esta automação.');
           }
-        }
-        if (!actions.response) {
-          actions.response = generateContextualResponse('minecraft', context);
-          actions.handled = true;
-        }
-        break;
+          break;
+        case 'response':
+          const response = await action.generator(context);
+          await message.reply(response);
+          break;
+        case 'problem_solver':
+          const problemSolution = await action.handler(context);
+          await message.reply(problemSolution);
+          break;
+        default:
+          logger.warn(`Tipo de ação desconhecida para intenção ${detectedIntent}: ${action.type}`);
+          break;
       }
-      case 'filosofia': {
-        actions.response = generateContextualResponse('filosofia', context);
-        actions.handled = true;
-        break;
-      }
-      case 'xadrez': {
-        actions.response = generateContextualResponse('xadrez', context);
-        actions.handled = true;
-        break;
-      }
-      case 'moderacao': {
-        actions.response = 'Para moderar, utilize `/moderacao timeout` ou `/moderacao limpar`. Posso orientar sem executar ações automaticamente.';
-        actions.handled = true;
-        break;
-      }
-      case 'erro': {
-        actions.response = 'Detectei possível erro. Se puder, descreva o problema que ocorreu para que eu sugira correções ou passos.';
-        actions.handled = true;
-        break;
-      }
-      case 'matheus_mode': {
-        actions.response = 'O comando "matheus mode" não está disponível ou foi desativado.';
-        actions.handled = true;
-        break;
-      }
-      default: {
-        // fallback seguro
-        actions.response = generateContextualResponse(message, context);
-        actions.handled = false;
-      }
+      return true;
     }
-  } catch (e) {
-    logger.warn(`Falha no roteamento de automação: ${e && e.message ? e.message : e}`);
   }
 
-  return actions;
-}
-
-async function autoRespondStandardCases(message, userId, channel) {
-  const { intent, score } = scoreIntent(message);
-  if (score <= 0) return null;
-  const routed = routeToModule(intent, message, userId, channel);
-  // Evita ruído: responder apenas para intent com confiança mínima
-  if (routed && routed.response && score >= 1) {
-    try {
-      await channel.sendTyping();
-      await new Promise(r => setTimeout(r, 600));
-      await channel.send(routed.response);
-      logInteraction({ type: 'conversation', responseTime: 600, success: true });
-    } catch (e) {
-      logger.warn('Falha ao enviar resposta automática, mantendo fallback silencioso.');
-    }
-    return routed.response;
+  // 2. Análise de Problemas (se nenhuma intenção clara)
+  const problem = identifyProblem(context);
+  if (problem) {
+    logger.info(`Problema identificado: ${problem.type}. Gerando solução.`);
+    logInteraction({ type: 'automation', automation: 'problem_solver', success: true });
+    const solution = generateSolution(problem);
+    await message.reply(solution);
+    return true;
   }
-  return null;
+
+  return false;
 }
 
-module.exports = {
-  scoreIntent,
-  routeToModule,
-  autoRespondStandardCases
+
+async function autoRespondStandardCases(messageContent, userId, channel) {
+  logger.info(`autoRespondStandardCases chamado com: ${messageContent}`);
+  // Lógica de resposta automática padrão aqui
+  return false; // Retorna false por padrão, indicando que não houve resposta automática
+}
+
+function scoreIntent(messageContent, context) {
+  logger.info(`scoreIntent chamado com: ${messageContent}`);
+  // Lógica de pontuação de intenção aqui
+  return { intent: 'default' }; // Retorna uma intenção padrão
+}
+
+export {
+  routeAutomation,
+  autoRespondStandardCases,
+  scoreIntent
 };

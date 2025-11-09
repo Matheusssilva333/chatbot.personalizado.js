@@ -1,5 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const dataDir = path.join(__dirname, '../../data');
 const patternsFile = path.join(dataDir, 'anticipation.json');
@@ -104,10 +108,14 @@ function addPattern(pattern) {
   }
 }
 
-module.exports = {
+function setCooldown(ms) {
+  if (typeof ms === 'number' && ms > 0) COOLDOWN_MS = ms;
+}
+
+export {
   initNeedsAnticipation,
   anticipateNeeds,
   executeAnticipatedAction,
-  addPattern
-  , setCooldown: (ms) => { if (typeof ms === 'number' && ms > 0) COOLDOWN_MS = ms; }
+  addPattern,
+  setCooldown
 };

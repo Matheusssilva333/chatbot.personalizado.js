@@ -1,0 +1,15 @@
+{
+  "interactions": [],
+  "engagement": {
+    "averageConversationLength": 0,
+    "followUpUsageRate": 0
+  },
+  "diversity": {
+    "uniqueResponseRate": 0,
+    "synonymUsageRate": 0
+  },
+  "satisfaction": {
+    "averageRating": 0,
+    "totalRatings": 0
+  }
+}

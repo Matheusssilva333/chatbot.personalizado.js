@@ -1,5 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { synonymsDB } from '../utils/linguisticVariety.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const metricsPath = path.join(__dirname, '../../data/metrics.json');
 
 // Inicializar arquivo de métricas se não existir
@@ -77,7 +82,7 @@ function calculateResponseDiversity() {
     metrics.diversity.uniqueResponseRate = ((uniqueResponses / metrics.interactions.length) * 100).toFixed(2);
 
     // Taxa de uso de sinônimos (baseado em presença de sinônimos do banco de dados)
-    const synonymsDB = require('../utils/linguisticVariety').synonymsDB;
+
     const synonymUsedCount = metrics.interactions.filter(inter => {
       const responseWords = inter.botResponse.toLowerCase().split(/\s+/);
       return responseWords.some(word => Object.values(synonymsDB).flat().includes(word));
@@ -135,7 +140,7 @@ SATISFAÇÃO DO USUÁRIO:
 // Inicializar métricas ao carregar o módulo
 initMetrics();
 
-module.exports = {
+export {
   recordInteraction,
   calculateEngagementMetrics,
   calculateResponseDiversity,

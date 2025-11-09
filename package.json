@@ -2,10 +2,10 @@
   "name": "bot-luana",
   "version": "1.0.0",
   "description": "Bot Discord Luana - Assistente de IA com personalidade intelectual e reflexiva",
-  "main": "src/index.cjs",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node scripts/start.cjs",
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "dev:all": "concurrently -n bot,ui -c blue,green \"nodemon src/index.js\" \"vite\"",
     "ui": "vite",

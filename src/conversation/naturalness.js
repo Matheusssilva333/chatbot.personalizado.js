@@ -1,4 +1,4 @@
-function generateFormulations(base, profile = {}, count = 5) {
+export function generateFormulations(base, profile = {}, count = 5) {
   const b = String(base || '');
   const style = profile.stylePreference || 'pratico';
   const variants = [];
@@ -17,7 +17,6 @@ function generateFormulations(base, profile = {}, count = 5) {
     return newTxt;
   };
   const punct = (txt) => (txt.endsWith('.') ? txt.slice(0, -1) + '!' : txt + '.');
-  const question = (txt) => (txt.endsWith('.') ? txt.slice(0, -1) + '?' : txt + '?');
   const addFiller = (txt) => {
     const fillers = ['Então...', 'Bem,', 'Olha,', 'Tipo assim,', 'Sabe,', 'Uhm...', 'Pois é,'];
     return `${fillers[Math.floor(Math.random() * fillers.length)]} ${txt}`;
@@ -84,14 +83,14 @@ function generateFormulations(base, profile = {}, count = 5) {
   return variants;
 }
 
-function computeDelayMs(complexity = 0.5, textLen = 100) {
+export function computeDelayMs(complexity = 0.5, textLen = 100) {
   // 0.5–1.5s for simples respostas; aumentar ligeiramente com complexidade
   const base = 500 + Math.min(1000, Math.floor(complexity * 1000));
   const add = Math.min(300, Math.floor(textLen / 200 * 300));
   return base + add;
 }
 
-function applyTone(text, profile = {}, context = {}, sentiment = 0) {
+export function applyTone(text, profile = {}, context = {}, sentiment = 0) {
   const tone = profile.stylePreference || 'pratico';
   let modifiedText = text;
 
@@ -140,7 +139,7 @@ function applyTone(text, profile = {}, context = {}, sentiment = 0) {
   return modifiedText;
 }
 
-function getTransitionalPhrase() {
+export function getTransitionalPhrase() {
   const phrases = [
     "Mudando um pouco de assunto,",
     "A propósito,",
@@ -156,9 +155,6 @@ function getTransitionalPhrase() {
   return phrases[Math.floor(Math.random() * phrases.length)];
 }
 
-module.exports = {
-  generateFormulations,
-  computeDelayMs,
-  applyTone,
-  getTransitionalPhrase,
-};
+export function question(txt) {
+  return (txt.endsWith('.') ? txt.slice(0, -1) + '?' : txt + '?');
+}

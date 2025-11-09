@@ -1,12 +1,12 @@
-const { setupLogger } = require('../utils/logger');
-const { exec } = require('child_process');
-const fs = require('fs');
-const path = require('path');
+import { setupLogger } from '../utils/logger.js';
+import { exec } from 'child_process';
+import fs from 'fs';
+import path from 'path';
 
 const logger = setupLogger();
 const configPath = path.join(__dirname, '../../data/config.json');
 
-function loadConfig() {
+export function loadConfig() {
   try {
     if (!fs.existsSync(configPath)) {
       const defaults = {
@@ -23,44 +23,39 @@ function loadConfig() {
   }
 }
 
-function checkForUpdates(cb) {
-  const cfg = loadConfig();
-  if (!cfg.autoUpdate) return cb && cb(null, { enabled: false });
-  if (cfg.updateSource === 'git' && fs.existsSync(path.join(process.cwd(), '.git'))) {
-    exec('git fetch --all', { cwd: process.cwd() }, (err) => {
-      if (err) {
-        logger.warn('Falha ao buscar atualizações git.');
-        return cb && cb(err);
-      }
-      exec('git rev-parse HEAD', { cwd: process.cwd() }, (err2, head) => {
-        exec(`git rev-parse origin/${cfg.updateBranch}`, { cwd: process.cwd() }, (err3, remoteHead) => {
-          if (err2 || err3) return cb && cb(err2 || err3);
-          const changed = String(head).trim() !== String(remoteHead).trim();
-          cb && cb(null, { enabled: true, changed });
-        });
-      });
-    });
-  } else {
-    cb && cb(null, { enabled: false });
+export function saveConfig(newConfig) {
+  try {
+    fs.writeFileSync(configPath, JSON.stringify(newConfig, null, 2));
+  } catch (e) {
+    logger.error(`Erro ao salvar configuração de auto-atualização: ${e.message}`);
   }
 }
 
-function performUpdate(cb) {
-  const cfg = loadConfig();
-  if (!(cfg.autoUpdate && cfg.updateSource === 'git')) return cb && cb(null, false);
-  exec(`git pull origin ${cfg.updateBranch}`, { cwd: process.cwd() }, (err, stdout, stderr) => {
-    if (err) {
-      logger.warn('Falha ao aplicar atualização git.');
-      return cb && cb(err);
+export function checkAndApplyUpdate() {
+  const config = loadConfig();
+  if (!config.autoUpdate) {
+    logger.info('Auto-atualização desativada.');
+    return;
+  }
+
+  logger.info(`Verificando atualizações na branch ${config.updateBranch}...`);
+
+  exec(`git pull origin ${config.updateBranch}`, (error, stdout, stderr) => {
+    if (error) {
+      logger.error(`Erro ao puxar atualizações: ${error.message}`);
+      return;
     }
-    // opcional: instalar dependências
-    exec('npm install --silent', { cwd: process.cwd() }, (err2) => {
-      if (err2) {
-        logger.warn('Falha ao atualizar dependências após pull.');
-      }
-      cb && cb(null, true);
-    });
+    if (stderr) {
+      logger.warn(`Git stderr: ${stderr}`);
+    }
+    logger.info(`Git stdout: ${stdout}`);
+
+    if (stdout.includes('Already up to date.')) {
+      logger.info('Repositório já atualizado.');
+    } else {
+      logger.info('Atualizações encontradas e aplicadas. Reiniciando...');
+      // Aqui você pode adicionar lógica para reiniciar o bot, se necessário
+      // Por exemplo, process.exit(0) ou um mecanismo de reinício mais robusto
+    }
   });
 }
-
-module.exports = { loadConfig, checkForUpdates, performUpdate };

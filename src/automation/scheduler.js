@@ -1,11 +1,15 @@
-const { setupLogger } = require('../utils/logger');
-const { generateDailyReport, generateWeeklyReport } = require('../utils/performanceReports');
-const { optimizeParameters } = require('./selfOptimizer.cjs');
-const { checkAndAlert } = require('./alerts.cjs');
-const { notifyStatus } = require('./statusNotifier.cjs');
-const { monitorResources } = require('./processMonitor.cjs');
-const fs = require('fs');
-const path = require('path');
+import { setupLogger } from '../utils/logger.js';
+import { generateDailyReport, generateWeeklyReport } from '../utils/performanceReports.js';
+import { optimizeParameters } from './selfOptimizer.js';
+import { checkAndAlert } from './alerts.js';
+import { notifyStatus } from './statusNotifier.js';
+import { monitorResources } from './processMonitor.js';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const logger = setupLogger();
 
@@ -73,4 +77,4 @@ function initScheduler(client) {
   }, 60 * 1000);
 }
 
-module.exports = { initScheduler };
+export { initScheduler };

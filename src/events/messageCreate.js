@@ -6,15 +6,15 @@ import { rememberInteraction } from '../conversation/memory.js';
 import { isRepetitive, detectTopicShift } from '../conversation/contextVerifier.js';
 import { runAutomations } from '../automation/intelligentAutomation.js';
 import { recordProblematicInteraction } from '../automation/selfImprovement.js';
-import { enrichText, varyStructure, addCreativeFlair } from '../utils/linguisticVariety.cjs';
+import { enrichText, varyStructure, addCreativeFlair } from '../utils/linguisticVariety.js';
 import { recordInteraction } from '../monitoring/performanceReports.js';
 import { identifyProblem, generateSolution } from '../utils/problemSolver.js';
-import { anticipateNeeds, executeAnticipatedAction } from '../utils/needsAnticipation.cjs';
-import { detectError, generateCorrection, logError } from '../utils/selfCorrection.cjs';
+import { anticipateNeeds, executeAnticipatedAction } from '../utils/needsAnticipation.js';
+import { detectError, generateCorrection, logError } from '../utils/selfCorrection.js';
 import { logInteraction } from '../utils/performanceReports.js';
 import { getPersonalizationOptions, trackMessage, recordOutcome, recordContextData } from '../utils/personalizationEngine.js';
 import { extractEntities } from '../conversation/entities.js';
-import { autoRespondStandardCases, routeToModule, scoreIntent } from '../automation/automationRouter.js';
+import { autoRespondStandardCases, routeAutomation, scoreIntent } from '../automation/automationRouter.js';
 
 const logger = setupLogger();
 

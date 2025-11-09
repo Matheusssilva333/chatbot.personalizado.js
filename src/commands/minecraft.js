@@ -55,4 +55,7 @@ Espero que essas dicas sejam úteis! Se quiser discutir estratégias mais avanç
   }
 }
 
-export { data, execute };
+export default {
+  data,
+  execute
+};

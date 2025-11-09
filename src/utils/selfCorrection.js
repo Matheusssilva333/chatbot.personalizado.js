@@ -1,5 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Banco de dados de erros comuns e correções
 const errorsPath = path.join(__dirname, '../../data/errors.json');
@@ -31,7 +35,7 @@ let errorsDB = {
 };
 
 // Inicializar o sistema de auto-correção
-function initSelfCorrection() {
+export function initSelfCorrection() {
   try {
     const dataDir = path.join(__dirname, '../../data');
     if (!fs.existsSync(dataDir)) {
@@ -49,7 +53,7 @@ function initSelfCorrection() {
 }
 
 // Detectar erro com base na mensagem do usuário
-function detectError(message, previousResponse) {
+export function detectError(message, previousResponse) {
   if (!message) return null;
   
   const lowerMessage = message.toLowerCase();
@@ -74,7 +78,7 @@ function detectError(message, previousResponse) {
 }
 
 // Gerar resposta de correção
-function generateCorrection(error, correction = null) {
+export function generateCorrection(error, correction = null) {
   if (!error || !error.type) {
     return "Peço desculpas pelo erro. Vamos tentar novamente.";
   }
@@ -97,7 +101,7 @@ function generateCorrection(error, correction = null) {
 }
 
 // Registrar erro para aprendizado
-function logError(error, userMessage, botResponse) {
+export function logError(error, userMessage, botResponse) {
   // Implementação simplificada - apenas registra no console
   console.log("Erro detectado:", {
     type: error.type,
@@ -110,7 +114,7 @@ function logError(error, userMessage, botResponse) {
 }
 
 // Analisar feedback do usuário para melhorar respostas futuras
-function learnFromFeedback(error, correction) {
+export function learnFromFeedback(error, correction) {
   // Implementação simplificada - apenas registra no console
   console.log("Aprendendo com feedback:", {
     errorType: error.type,
@@ -120,11 +124,3 @@ function learnFromFeedback(error, correction) {
   // Em uma implementação completa, atualizaria o modelo de linguagem
   // ou banco de dados de respostas com base no feedback
 }
-
-module.exports = {
-  initSelfCorrection,
-  detectError,
-  generateCorrection,
-  logError,
-  learnFromFeedback
-};

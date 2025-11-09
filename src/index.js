@@ -1,21 +1,27 @@
 // Bot Discord Luana - Assistente de IA com personalidade intelectual e reflexiva
 // Arquivo principal (entrypoint): inicialização do cliente Discord, carregamento de comandos/eventos,
 // configuração de módulos de IA, telemetria e robustez com tratamento de erros.
-const { Client, GatewayIntentBits, Collection, Events } = require('discord.js');
-const { config } = require('dotenv');
-const fs = require('fs');
-const path = require('path');
-const { setupLogger } = require('./utils/logger');
-const { initLearningSystem } = require('./utils/learningSystem');
-const { initExpressions } = require('./utils/contextualResponses');
-const { initLinguisticVariety } = require('./utils/linguisticVariety.cjs');
-const { initProblemSolver } = require('./utils/problemSolver');
-const { initSelfCorrection } = require('./utils/selfCorrection.cjs');
-const { initPerformanceReports, generateDailyReport } = require('./utils/performanceReports');
-const { initNeedsAnticipation } = require('./utils/needsAnticipation.cjs');
-const { initPersonalization, flushToDisk, getMetrics } = require('./utils/personalizationEngine');
-const { initScheduler } = require('./automation/scheduler.cjs');
-const ResponseGenerator = require(path.join(__dirname, 'conversation', 'responseGenerator.cjs'));
+import { Client, GatewayIntentBits, Collection, Events } from 'discord.js';
+import { config } from 'dotenv';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import { setupLogger } from './utils/logger.js';
+import { initLearningSystem } from './utils/learningSystem.js';
+import { initExpressions } from './utils/contextualResponses.js';
+import { initLinguisticVariety } from './utils/linguisticVariety.js';
+import { initProblemSolver } from './utils/problemSolver.js';
+import { initSelfCorrection } from './utils/selfCorrection.js';
+import { initPerformanceReports as initPerformanceReportsUtil } from './utils/performanceReports.js';
+import { generatePerformanceReport } from './monitoring/performanceReports.js';
+import { initNeedsAnticipation } from './utils/needsAnticipation.js';
+import { initPersonalization, flushToDisk, getMetrics } from './utils/personalizationEngine.js';
+import { initScheduler } from './automation/scheduler.js';
+import ResponseGenerator from './conversation/responseGenerator.js';
 
 // Configuração do ambiente
 config();
@@ -42,17 +48,19 @@ const eventPath = path.join(__dirname, 'events');
 try {
   const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
   
-  for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
-    
-    if ('data' in command && 'execute' in command) {
-      client.commands.set(command.data.name, command);
-      logger.info(`Comando carregado: ${command.data.name}`);
-    } else {
-      logger.warn(`O comando em ${filePath} está faltando a propriedade "data" ou "execute" obrigatória`);
+  (async () => {
+    for (const file of commandFiles) {
+      const filePath = `file://${path.join(commandsPath, file)}`;
+      const command = await import(filePath);
+      
+      if (command.default && 'data' in command.default && 'execute' in command.default) {
+        client.commands.set(command.default.data.name, command.default);
+        logger.info(`Comando carregado: ${command.default.data.name}`);
+      } else {
+        logger.warn(`O comando em ${filePath} está faltando a propriedade "data" ou "execute" obrigatória, ou o default export está ausente.`);
+      }
     }
-  }
+  })();
 } catch (error) {
   logger.error(`Erro ao carregar comandos: ${error.message}`);
 }
@@ -61,18 +69,20 @@ try {
 try {
   const eventFiles = fs.readdirSync(eventPath).filter(file => file.endsWith('.js'));
   
-  for (const file of eventFiles) {
-    const filePath = path.join(eventPath, file);
-    const event = require(filePath);
-    
-    if (event.once) {
-      client.once(event.name, (...args) => event.execute(...args, require(path.join(__dirname, 'conversation', 'responseGenerator.cjs'))));
-    } else {
-      client.on(event.name, (...args) => event.execute(...args, require(path.join(__dirname, 'conversation', 'responseGenerator.cjs'))));
+  (async () => {
+    for (const file of eventFiles) {
+      const filePath = `file://${path.join(eventPath, file)}`;
+      const event = await import(filePath);
+      
+      if (event.default.once) {
+        client.once(event.default.name, (...args) => event.default.execute(...args, responseGenerator));
+      } else {
+        client.on(event.default.name, (...args) => event.default.execute(...args, responseGenerator));
+      }
+      
+      logger.info(`Evento carregado: ${event.default.name}`);
     }
-    
-    logger.info(`Evento carregado: ${event.name}`);
-  }
+  })();
 } catch (error) {
   logger.error(`Erro ao carregar eventos: ${error.message}`);
 }
@@ -86,7 +96,7 @@ client.once(Events.ClientReady, () => {
   initLinguisticVariety();
   initProblemSolver();
   initSelfCorrection();
-  initPerformanceReports();
+  initPerformanceReportsUtil();
   initNeedsAnticipation();
   initPersonalization({ logsFilePath: path.join(__dirname, '../logs/combined.log') });
   logger.info('Módulos de aprendizado, respostas, variedade linguística, solução de problemas, auto-correção e relatórios inicializados.');
@@ -97,7 +107,7 @@ client.once(Events.ClientReady, () => {
   // Agendar relatório diário básico
   setInterval(() => {
     try {
-      const report = generateDailyReport();
+      const report = generatePerformanceReport();
       logger.info('Relatório diário de desempenho gerado.');
     } catch (e) {
       logger.warn('Falha ao gerar relatório diário.');

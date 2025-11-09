@@ -1,4 +1,4 @@
-const { setupLogger } = require('../utils/logger');
+import { setupLogger } from '../utils/logger.js';
 const logger = setupLogger();
 
 function getMemoryMB() {
@@ -6,7 +6,7 @@ function getMemoryMB() {
   return rss / (1024 * 1024);
 }
 
-function monitorResources({ memoryLimitMB = 100 } = {}) {
+export function monitorResources({ memoryLimitMB = 100 } = {}) {
   try {
     const mem = getMemoryMB();
     if (mem > memoryLimitMB) {
@@ -16,5 +16,3 @@ function monitorResources({ memoryLimitMB = 100 } = {}) {
     logger.warn('Falha ao monitorar recursos.');
   }
 }
-
-module.exports = { monitorResources };

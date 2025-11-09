@@ -60,4 +60,7 @@ Carlsen representa a fusão ideal entre intuição e cálculo preciso, demonstra
   }
 }
 
-export { data, execute };
+export default {
+  data,
+  execute
+};
